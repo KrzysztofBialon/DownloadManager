@@ -9,11 +9,9 @@ import java.net.URL;
 public class HTTPConnectionClass {
 
     private URL url;
-    private String fileURL;
 
-    public HTTPConnectionClass(String url, String fileURL) throws MalformedURLException {
+    public HTTPConnectionClass(String url) throws MalformedURLException {
         this.url = new URL(url);
-        this.fileURL = fileURL;
     }
 
     public void setConnection() throws Exception
@@ -22,6 +20,8 @@ public class HTTPConnectionClass {
         httpsURLConnection.setRequestMethod("GET");
         httpsURLConnection.connect();
 
-        SaveFileFromURL.saveFile(fileURL ,url);
+        SaveFileFromURL saveFileFromURL = new SaveFileFromURL(url);
+
+        saveFileFromURL.run();
     }
 }
