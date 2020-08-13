@@ -17,35 +17,31 @@ import java.util.concurrent.Executors;
 public class SaveFileFromURL implements Runnable {
 
 
-    String fileExtension = "exe";
+    private final String fileExtension;
+    private final URL url;
+    private String filename;
+    private String saveFilePath;
+    private FileOutputStream fileOutputStream = null;
+    private ReadableByteChannel readableByteChannel = null;
 
-    String filename = "test." + fileExtension;
-
-    String saveFilePath = "C:/Users/User/Downloads" + File.separator + filename;
-
-    URL url;
-
-    public SaveFileFromURL(URL url) {
+    public SaveFileFromURL(URL url, String fileExtension) {
         this.url = url;
+        this.fileExtension = fileExtension;
     }
 
     @Override
     public void run() {
 
-        String fileExtension = "exe";
+        filename = "test." + fileExtension;
 
-        String filename = "test." + fileExtension;
+        saveFilePath = "C:/Users/User/Downloads" + File.separator + filename;
 
-        String saveFilePath = "C:/Users/User/Downloads" + File.separator + filename;
-
-        ReadableByteChannel readableByteChannel = null;
         try {
             readableByteChannel = Channels.newChannel(url.openStream());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        FileOutputStream fileOutputStream = null;
         try {
             fileOutputStream = new FileOutputStream(saveFilePath);
         } catch (FileNotFoundException e) {

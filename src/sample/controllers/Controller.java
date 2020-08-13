@@ -32,7 +32,7 @@ public class Controller {
                                         {
                                             try
                                             {
-                                                new HTTPConnectionClass(this.urlInputField.getText()).setConnection();
+                                                new HTTPConnectionClass(this.urlInputField.getText(), this.extensionBtn.getText()).setConnection();
                                             } catch (Exception e)
                                             {
                                                 e.printStackTrace();
