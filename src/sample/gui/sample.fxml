@@ -20,8 +20,8 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <TextField id="urlInputField" prefHeight="42.0" prefWidth="484.0" />
-            <MenuButton mnemonicParsing="false" prefHeight="56.0" prefWidth="88.0" text="Extension">
+            <TextField fx:id="urlInputField" prefHeight="42.0" prefWidth="484.0" />
+            <MenuButton fx:id="extensionBtn" mnemonicParsing="false" prefHeight="56.0" prefWidth="88.0" text="Extension">
               <items>
                 <MenuItem mnemonicParsing="false" text="exe" />
                 <MenuItem mnemonicParsing="false" text="zip" />
