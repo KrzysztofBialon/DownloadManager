@@ -28,35 +28,10 @@ public class SaveFileFromURL implements Runnable {
     public SaveFileFromURL(URL url) {
         this.url = url;
     }
-/*//public static void saveFile(URL url) throws IOException {
-
-        String fileExtension = "exe";
-
-        String filename = "test." + fileExtension;
-
-        String saveFilePath = "C:/Users/User/Downloads" + File.separator + filename;
-
-        ReadableByteChannel readableByteChannel = Channels.newChannel(url.openStream());
-
-        FileOutputStream fileOutputStream = new FileOutputStream(saveFilePath);
-
-        FileChannel fileChannel = fileOutputStream.getChannel();
-
-        DownloadFileThread download = new DownloadFileThread(fileChannel, readableByteChannel);
-
-        DownloadProgressTracker progress = new DownloadProgressTracker(fileChannel, readableByteChannel);
-
-
-        ExecutorService executorService = Executors.newFixedThreadPool(2);
-
-        executorService.execute(progress);
-        executorService.execute(download);
-
-        executorService.shutdown();
-    }*/
 
     @Override
     public void run() {
+
         String fileExtension = "exe";
 
         String filename = "test." + fileExtension;
