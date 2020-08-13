@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane id="contentWrapper" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="687.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane id="contentWrapper" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="687.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.controllers.Controller">
    <top>
       <HBox prefHeight="43.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -31,7 +31,7 @@
                   <MenuItem mnemonicParsing="false" text="mp3" />
               </items>
             </MenuButton>
-            <Button id="startDownloadBtn" minWidth="38.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="79.0" text="Download" />
+            <Button fx:id="startDownloadBtn" minWidth="38.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="79.0" text="Download" />
          </children>
          <BorderPane.margin>
             <Insets left="2.0" right="2.0" top="5.0" />
