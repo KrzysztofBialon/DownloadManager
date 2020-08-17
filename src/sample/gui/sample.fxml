@@ -2,10 +2,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -21,16 +20,7 @@
                </font>
             </Label>
             <TextField fx:id="urlInputField" prefHeight="42.0" prefWidth="484.0" />
-            <MenuButton fx:id="extensionBtn" mnemonicParsing="false" prefHeight="56.0" prefWidth="88.0" text="Extension">
-              <items>
-                <MenuItem mnemonicParsing="false" text="exe" />
-                <MenuItem mnemonicParsing="false" text="zip" />
-                  <MenuItem mnemonicParsing="false" text="txt" />
-                  <MenuItem mnemonicParsing="false" text="pdf" />
-                  <MenuItem mnemonicParsing="false" text="mp4" />
-                  <MenuItem mnemonicParsing="false" text="mp3" />
-              </items>
-            </MenuButton>
+            <ComboBox fx:id="extensionSelectionBox" prefHeight="55.0" prefWidth="133.0"/>
             <Button fx:id="startDownloadBtn" minWidth="38.0" mnemonicParsing="false" prefHeight="52.0" prefWidth="79.0" text="Download" />
          </children>
          <BorderPane.margin>
@@ -39,6 +29,6 @@
       </HBox>
    </top>
    <center>
-      <ListView id="downloadsList" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <ListView fx:id="downloadsList" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

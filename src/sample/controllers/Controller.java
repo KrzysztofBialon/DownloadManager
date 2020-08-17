@@ -1,43 +1,46 @@
 package sample.controllers;
 
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
-import sample.gui.DownloadItemBar;
 import sample.httpconnection.HTTPConnectionClass;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class Controller {
 
     @FXML
     private Button startDownloadBtn;
     @FXML
-    private MenuButton extensionBtn;
-    @FXML
     private TextField urlInputField;
+    @FXML
+    private ListView downloadsList;
+    @FXML
+    private ComboBox extensionSelectionBox;
 
-    private ObservableList<Button> downloadsItemsObservableList;
-
-    //String fileUrl = "https://javadl.oracle.com/webapps/download/AutoDL?BundleId=242990_a4634525489241b9a9e1aa73d9e118e6";
-
+    private final List<String> extensionList = Arrays.asList("exe", "zip", "pdf", "txt", "mp3", "mp4");
 
     @FXML
     public void initialize()
     {
+        //Initialize extension box with ext list
+        extensionSelectionBox.getItems().setAll(extensionList);
+        extensionSelectionBox.setValue(extensionList.get(0));
+        //Add functionality to startDownload button
         startDownloadBtn.addEventHandler(MouseEvent.MOUSE_CLICKED,
                                         mouseEvent ->
                                         {
+
                                             try
                                             {
-                                                new HTTPConnectionClass(this.urlInputField.getText(), this.extensionBtn.getText()).setConnection();
+                                                new HTTPConnectionClass(this.urlInputField.getText(), this.extensionSelectionBox.getValue().toString()).setConnection();
                                             } catch (Exception e)
                                             {
                                                 e.printStackTrace();
                                             }
                                         });
+
     }
 
 
