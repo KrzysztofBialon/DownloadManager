@@ -3,6 +3,8 @@ package sample.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import sample.gui.DownloadItemBar;
 import sample.httpconnection.HTTPConnectionClass;
@@ -12,6 +14,10 @@ import java.util.List;
 
 public class Controller {
 
+    @FXML
+    private BorderPane contentWrapper;
+    @FXML
+    private HBox topBarContainer;
     @FXML
     private Button startDownloadBtn;
     @FXML
@@ -26,6 +32,9 @@ public class Controller {
     @FXML
     public void initialize()
     {
+        contentWrapper.setMaxSize(800, 800);
+
+        topBarContainer.prefWidthProperty().bind(contentWrapper.widthProperty());
         //Initialize extension box with ext list
         extensionSelectionBox.getItems().setAll(extensionList);
         extensionSelectionBox.setValue(extensionList.get(0));
