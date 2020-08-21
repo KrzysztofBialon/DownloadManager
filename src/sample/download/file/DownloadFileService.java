@@ -9,8 +9,8 @@ import java.nio.channels.ReadableByteChannel;
 
 public class DownloadFileService extends Service {
 
-    private FileChannel fileChannel;
-    private ReadableByteChannel readableByteChannel;
+    private final FileChannel fileChannel;
+    private final ReadableByteChannel readableByteChannel;
 
     public DownloadFileService(FileChannel fileChannel, ReadableByteChannel readableByteChannel) {
         this.fileChannel = fileChannel;
@@ -19,12 +19,19 @@ public class DownloadFileService extends Service {
 
     @Override
     protected Task createTask() {
-        try
-        {
-            fileChannel.transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
-            readableByteChannel.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        return new Task() {
+            @Override
+            protected Object call() throws Exception {
+                try
+                {
+                    fileChannel.transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
+                    readableByteChannel.close();
+                    return true;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+            }
+        };
     }
 }
