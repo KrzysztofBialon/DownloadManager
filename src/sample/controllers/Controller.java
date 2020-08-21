@@ -3,6 +3,8 @@ package sample.controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import sample.gui.DownloadItemBar;
 import sample.httpconnection.HTTPConnectionClass;
 
 import java.util.Arrays;
@@ -15,7 +17,7 @@ public class Controller {
     @FXML
     private TextField urlInputField;
     @FXML
-    private ListView downloadsList;
+    private VBox downloadListWrapper;
     @FXML
     private ComboBox extensionSelectionBox;
 
@@ -40,6 +42,8 @@ public class Controller {
                                                 e.printStackTrace();
                                             }
                                         });
+
+        downloadListWrapper.getChildren().add(new DownloadItemBar("test", 10000).getWrapper());
 
     }
 
