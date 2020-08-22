@@ -1,7 +1,8 @@
 package sample.download;
 
-import sample.download.file.DownloadFileThread;
+import sample.download.file.DownloadFileTask;
 import sample.download.progress.DownloadProgressTracker;
+import sample.gui.DownloadItemBar;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,7 +15,7 @@ import java.nio.channels.ReadableByteChannel;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class SaveFileFromURL implements Runnable {
+public class SaveFileFromURL{
 
 
     private final String fileExtension;
@@ -29,8 +30,7 @@ public class SaveFileFromURL implements Runnable {
         this.fileExtension = fileExtension;
     }
 
-    @Override
-    public void run() {
+    public void runDownload(DownloadItemBar bar) {
 
         filename = "test." + fileExtension;
 
@@ -50,15 +50,16 @@ public class SaveFileFromURL implements Runnable {
 
         FileChannel fileChannel = fileOutputStream.getChannel();
 
-        DownloadFileThread download = new DownloadFileThread(fileChannel, readableByteChannel);
-
         DownloadProgressTracker progress = new DownloadProgressTracker(fileChannel, readableByteChannel);
-
 
         ExecutorService executorService = Executors.newFixedThreadPool(2);
 
+        DownloadFileTask task = new DownloadFileTask(fileChannel, readableByteChannel);
+        
+        bar.getProgressBar().progressProperty().bind(task.progressProperty());
+
         executorService.execute(progress);
-        executorService.execute(download);
+        executorService.execute(task);
 
         executorService.shutdown();
     };

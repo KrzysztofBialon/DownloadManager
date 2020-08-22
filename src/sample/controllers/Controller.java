@@ -42,18 +42,21 @@ public class Controller {
         startDownloadBtn.addEventHandler(MouseEvent.MOUSE_CLICKED,
                                         mouseEvent ->
                                         {
+                                            try {
+                                                if(new HTTPConnectionClass(
+                                                        this.urlInputField.getText(),
+                                                        this.extensionSelectionBox.getValue().toString()).
+                                                        setConnection())
+                                                {
 
-                                            try
-                                            {
-                                                new HTTPConnectionClass(this.urlInputField.getText(), this.extensionSelectionBox.getValue().toString()).setConnection();
-                                            } catch (Exception e)
-                                            {
+                                                }
+                                            } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         });
 
-        downloadListWrapper.getChildren().add(new DownloadItemBar("test", 10000).getWrapper());
-
+        downloadListWrapper.getChildren().
+                add(new DownloadItemBar("test", 10000).getWrapper());
     }
 
 

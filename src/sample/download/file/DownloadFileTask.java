@@ -1,27 +1,30 @@
 package sample.download.file;
 
+import javafx.concurrent.Task;
+
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
 
-public class DownloadFileThread implements Runnable {
+public class DownloadFileTask extends Task {
 
-    private FileChannel fileChannel;
-    private ReadableByteChannel readableByteChannel;
+    private final FileChannel fileChannel;
+    private final ReadableByteChannel readableByteChannel;
 
-    public DownloadFileThread(FileChannel fileChannel, ReadableByteChannel readableByteChannel) {
+    public DownloadFileTask(FileChannel fileChannel, ReadableByteChannel readableByteChannel) {
         this.fileChannel = fileChannel;
         this.readableByteChannel = readableByteChannel;
     }
-
     @Override
-    public void run() {
+    protected Object call() throws Exception {
         try
         {
             fileChannel.transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
             readableByteChannel.close();
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 }

@@ -52,10 +52,13 @@ public class DownloadItemBar {
         this.cancelBtn.prefWidthProperty().bind(wrapper.widthProperty());
         this.cancelBtn.prefHeightProperty().bind(wrapper.heightProperty());
 
-        wrapper.getChildren().setAll(this.filename, progressBar, downloadStatus, startBtn, pauseBtn, cancelBtn);
+        wrapper.getChildren().setAll(
+                this.filename, progressBar, downloadStatus, startBtn, pauseBtn, cancelBtn);
     }
 
     public HBox getWrapper() {
         return wrapper;
     }
+
+    public ProgressBar getProgressBar(){return progressBar;}
 }
