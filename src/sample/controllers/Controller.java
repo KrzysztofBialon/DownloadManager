@@ -6,6 +6,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import sample.DownloadActionBuilder;
 import sample.TaskBuilder;
 import sample.DownloadPoolManager;
 import sample.FileDetailsClass;
@@ -46,7 +47,7 @@ public class Controller {
                                         mouseEvent ->
                                         {
                                             try {
-                                                FileDetailsClass fileDetailsClass = HTTPConnectionClass.
+                                                /*FileDetailsClass fileDetailsClass = HTTPConnectionClass.
                                                         setConnection(urlInputField.getText(),
                                                         extensionSelectionBox.
                                                                 getValue().
@@ -57,8 +58,20 @@ public class Controller {
                                                 DownloadItemBar bar = new DownloadItemBar(
                                                         fileDetailsClass.getFileHeaderName(),
                                                         fileDetailsClass.getFileSize());
-                                                bar.getProgressBar().progressProperty().bind();
-                                                downloadListWrapper.getChildren().add(bar.getWrapper());
+                                                downloadListWrapper.getChildren().add(bar.getWrapper());*/
+
+                                                DownloadActionBuilder actionBuilder = new DownloadActionBuilder();
+
+                                                actionBuilder.build(urlInputField.getText(),
+                                                        extensionSelectionBox.
+                                                                getValue().
+                                                                toString());
+                                                
+                                                downloadListWrapper.
+                                                        getChildren().
+                                                        add(actionBuilder.
+                                                                getBar().
+                                                                getWrapper());
                                             } catch (Exception e) {
                                                 e.printStackTrace();
                                             }

@@ -26,7 +26,7 @@ public class SaveFileFromURL{
 
     public static DownloadFileTask setDestination(FileDetailsClass details) {
 
-        String filename = details.getFileHeaderName() + details.getExtension();
+        String filename = details.getFileHeaderName()+ "." + details.getExtension();
         String saveFilePath = "C:/Users/User/Downloads" + File.separator + filename;
         FileOutputStream fileOutputStream = null;
         ReadableByteChannel readableByteChannel = null;
