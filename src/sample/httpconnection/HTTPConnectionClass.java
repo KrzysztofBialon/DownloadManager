@@ -1,5 +1,6 @@
 package sample.httpconnection;
 
+import sample.FileDetailsClass;
 import sample.download.SaveFileFromURL;
 import sample.gui.DownloadItemBar;
 
@@ -9,19 +10,22 @@ import java.net.URL;
 
 public class HTTPConnectionClass {
 
-    private URL url;
+    /*private URL url;
+    private String extension;
 
-    public HTTPConnectionClass(String url) throws MalformedURLException {
+    public HTTPConnectionClass(String url, String ext) throws MalformedURLException {
         this.url = new URL(url);
-    }
+        this.extension = ext;
+    }*/
 
-    public int setConnection() throws Exception
+    public static FileDetailsClass setConnection(String url, String extension) throws Exception
     {
-        HttpsURLConnection httpsURLConnection = (HttpsURLConnection) url.openConnection();
+        URL urlBuilder = new URL(url);
+        HttpsURLConnection httpsURLConnection = (HttpsURLConnection) urlBuilder.openConnection();
         httpsURLConnection.setRequestMethod("GET");
         httpsURLConnection.connect();
-
-        return httpsURLConnection.getResponseCode();
-
+        if(httpsURLConnection.getResponseCode() != 200) return null;
+        return new FileDetailsClass(httpsURLConnection.getHeaderField(
+                "Content-Disposition"), urlBuilder, httpsURLConnection.getContentLengthLong(), extension);
     }
 }

@@ -6,6 +6,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import sample.ConnectionBuilder;
 import sample.gui.DownloadItemBar;
 import sample.httpconnection.HTTPConnectionClass;
 
@@ -43,13 +44,11 @@ public class Controller {
                                         mouseEvent ->
                                         {
                                             try {
-                                                if(new HTTPConnectionClass(
-                                                        this.urlInputField.getText(),
-                                                        this.extensionSelectionBox.getValue().toString()).
-                                                        setConnection())
-                                                {
-
-                                                }
+                                                ConnectionBuilder.createSaveFileClass(
+                                                        urlInputField.getText(),
+                                                        extensionSelectionBox.
+                                                                getValue().
+                                                                toString());
                                             } catch (Exception e) {
                                                 e.printStackTrace();
                                             }

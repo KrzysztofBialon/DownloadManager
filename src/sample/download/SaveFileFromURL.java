@@ -1,5 +1,6 @@
 package sample.download;
 
+import sample.FileDetailsClass;
 import sample.download.file.DownloadFileTask;
 import sample.download.progress.DownloadProgressTracker;
 import sample.gui.DownloadItemBar;
@@ -17,29 +18,29 @@ import java.util.concurrent.Executors;
 
 public class SaveFileFromURL{
 
-
-    private final String fileExtension;
-    private final URL url;
+   /* private FileDetailsClass details;
     private String filename;
     private String saveFilePath;
+    private FileChannel fileChannel = null;
     private FileOutputStream fileOutputStream = null;
     private ReadableByteChannel readableByteChannel = null;
 
-    public SaveFileFromURL(URL url, String fileExtension) {
-        this.url = url;
-        this.fileExtension = fileExtension;
-    }
+    public SaveFileFromURL(FileDetailsClass details) {
+        this.details = details;
+    }*/
 
-    public void runDownload(DownloadItemBar bar) {
+    public static void runDownload(FileDetailsClass details) {
 
-        filename = "test." + fileExtension;
-
-        saveFilePath = "C:/Users/User/Downloads" + File.separator + filename;
-
+        String filename = details.getFileHeaderName() + details.getExtension();
+        String saveFilePath = "C:/Users/User/Downloads" + File.separator + filename;
+        FileOutputStream fileOutputStream = null;
+        ReadableByteChannel readableByteChannel = null;
+        FileChannel fileChannel;
+        DownloadFileTask task;
         try {
-            readableByteChannel = Channels.newChannel(url.openStream());
+            readableByteChannel = Channels.newChannel(details.getFileURL().openStream());
         } catch (IOException e) {
-            e.printStackTrace();
+            e.printStackTrace();;
         }
 
         try {
@@ -48,19 +49,17 @@ public class SaveFileFromURL{
             e.printStackTrace();
         }
 
-        FileChannel fileChannel = fileOutputStream.getChannel();
-
-        DownloadProgressTracker progress = new DownloadProgressTracker(fileChannel, readableByteChannel);
+        fileChannel = fileOutputStream.getChannel();
+        DownloadFileTask task = new DownloadFileTask(fileChannel, readableByteChannel);
+        /*DownloadProgressTracker progress = new DownloadProgressTracker(fileChannel, readableByteChannel);
 
         ExecutorService executorService = Executors.newFixedThreadPool(2);
 
         DownloadFileTask task = new DownloadFileTask(fileChannel, readableByteChannel);
-        
-        bar.getProgressBar().progressProperty().bind(task.progressProperty());
 
         executorService.execute(progress);
         executorService.execute(task);
 
-        executorService.shutdown();
+        executorService.shutdown();*/
     };
 }
