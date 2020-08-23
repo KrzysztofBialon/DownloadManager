@@ -7,7 +7,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import sample.ConnectionBuilder;
-import sample.gui.DownloadItemBar;
+import sample.DownloadPoolManager;
+import sample.FileDetailsClass;
+import sample.gui.elements.DownloadItemBar;
 import sample.httpconnection.HTTPConnectionClass;
 
 import java.util.Arrays;
@@ -29,7 +31,7 @@ public class Controller {
     private ComboBox extensionSelectionBox;
 
     private final List<String> extensionList = Arrays.asList("exe", "zip", "pdf", "txt", "mp3", "mp4");
-
+    private DownloadPoolManager downloadPoolManager = new DownloadPoolManager();
     @FXML
     public void initialize()
     {
@@ -44,18 +46,22 @@ public class Controller {
                                         mouseEvent ->
                                         {
                                             try {
-                                                ConnectionBuilder.createSaveFileClass(
-                                                        urlInputField.getText(),
+                                                FileDetailsClass fileDetailsClass = HTTPConnectionClass.
+                                                        setConnection(urlInputField.getText(),
                                                         extensionSelectionBox.
                                                                 getValue().
                                                                 toString());
+                                                DownloadPoolManager.
+                                                        addDownloadToPool(
+                                                            ConnectionBuilder.createSaveFileClass(fileDetailsClass));
+                                                DownloadItemBar bar = new DownloadItemBar(
+                                                        fileDetailsClass.getFileHeaderName(),
+                                                        fileDetailsClass.getFileSize());
+                                                downloadListWrapper.getChildren().add(bar.getWrapper());
                                             } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
                                         });
-
-        downloadListWrapper.getChildren().
-                add(new DownloadItemBar("test", 10000).getWrapper());
     }
 
 

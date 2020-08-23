@@ -1,11 +1,8 @@
 package sample.httpconnection;
 
 import sample.FileDetailsClass;
-import sample.download.SaveFileFromURL;
-import sample.gui.DownloadItemBar;
 
 import javax.net.ssl.HttpsURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class HTTPConnectionClass {
@@ -26,6 +23,9 @@ public class HTTPConnectionClass {
         httpsURLConnection.connect();
         if(httpsURLConnection.getResponseCode() != 200) return null;
         return new FileDetailsClass(httpsURLConnection.getHeaderField(
-                "Content-Disposition"), urlBuilder, httpsURLConnection.getContentLengthLong(), extension);
+                "Content-Disposition"),
+                urlBuilder,
+                httpsURLConnection.getContentLengthLong(),
+                extension);
     }
 }
