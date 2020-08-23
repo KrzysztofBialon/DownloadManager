@@ -6,7 +6,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import sample.ConnectionBuilder;
+import sample.TaskBuilder;
 import sample.DownloadPoolManager;
 import sample.FileDetailsClass;
 import sample.gui.elements.DownloadItemBar;
@@ -53,10 +53,11 @@ public class Controller {
                                                                 toString());
                                                 DownloadPoolManager.
                                                         addDownloadToPool(
-                                                            ConnectionBuilder.createSaveFileClass(fileDetailsClass));
+                                                            TaskBuilder.createSaveFileClass(fileDetailsClass));
                                                 DownloadItemBar bar = new DownloadItemBar(
                                                         fileDetailsClass.getFileHeaderName(),
                                                         fileDetailsClass.getFileSize());
+                                                bar.getProgressBar().progressProperty().bind();
                                                 downloadListWrapper.getChildren().add(bar.getWrapper());
                                             } catch (Exception e) {
                                                 e.printStackTrace();

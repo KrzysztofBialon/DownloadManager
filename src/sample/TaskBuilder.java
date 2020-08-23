@@ -5,8 +5,8 @@ import sample.download.file.DownloadFileTask;
 import sample.httpconnection.HTTPConnectionClass;
 
 
-public class ConnectionBuilder {
-    public static DownloadFileTask createSaveFileClass(FileDetailsClass details) throws Exception {
+public class TaskBuilder {
+    public static DownloadFileTask createSaveFileClass(FileDetailsClass details) {
         return SaveFileFromURL.setDestination(details);
     }
 }
