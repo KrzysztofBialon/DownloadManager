@@ -10,9 +10,8 @@ public class DownloadPoolManager
 {
     private static ExecutorService executorService = Executors.newFixedThreadPool(5);
 
-    public static void addDownloadToPool(DownloadFileTask task, DownloadItemBar bar)
+    public static void addDownloadToPool(DownloadFileTask task)
     {
-        bar.getProgressBar().progressProperty().bind(task.progressProperty());
         executorService.execute(task);
     }
 }

@@ -10,21 +10,27 @@ public class DownloadFileTask extends Task {
 
     private final FileChannel fileChannel;
     private final ReadableByteChannel readableByteChannel;
+    private final long fileSize;
 
-    public DownloadFileTask(FileChannel fileChannel, ReadableByteChannel readableByteChannel) {
+    public DownloadFileTask(FileChannel fileChannel, ReadableByteChannel readableByteChannel, long fileSize) {
         this.fileChannel = fileChannel;
         this.readableByteChannel = readableByteChannel;
+        this.fileSize = fileSize;
     }
     @Override
-    protected Object call() throws Exception {
+    protected Void call(){
         try
         {
-            fileChannel.transferFrom(readableByteChannel, 0, Long.MAX_VALUE);
+            for(long pos = 0; pos < fileSize; pos += 32)
+            {
+                fileChannel.transferFrom(readableByteChannel, pos, Long.MAX_VALUE);
+                updateProgress(pos, fileSize);
+            }
             readableByteChannel.close();
-            return true;
+            fileChannel.close();
         } catch (IOException e) {
             e.printStackTrace();
-            return false;
         }
+        return null;
     }
 }

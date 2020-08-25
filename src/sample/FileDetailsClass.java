@@ -24,7 +24,7 @@ public class FileDetailsClass
         return fileURL;
     }
 
-    public double getFileSize() {
+    public long getFileSize() {
         return fileSize;
     }
 

@@ -1,5 +1,6 @@
 package sample.controllers;
 
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -47,31 +48,21 @@ public class Controller {
                                         mouseEvent ->
                                         {
                                             try {
-                                                /*FileDetailsClass fileDetailsClass = HTTPConnectionClass.
-                                                        setConnection(urlInputField.getText(),
-                                                        extensionSelectionBox.
-                                                                getValue().
-                                                                toString());
-                                                DownloadPoolManager.
-                                                        addDownloadToPool(
-                                                            TaskBuilder.createSaveFileClass(fileDetailsClass));
-                                                DownloadItemBar bar = new DownloadItemBar(
-                                                        fileDetailsClass.getFileHeaderName(),
-                                                        fileDetailsClass.getFileSize());
-                                                downloadListWrapper.getChildren().add(bar.getWrapper());*/
-
                                                 DownloadActionBuilder actionBuilder = new DownloadActionBuilder();
 
+                                                ProgressBar bar = new ProgressBar();
+                                                Task task =
                                                 actionBuilder.build(urlInputField.getText(),
                                                         extensionSelectionBox.
                                                                 getValue().
                                                                 toString());
-                                                
-                                                downloadListWrapper.
-                                                        getChildren().
-                                                        add(actionBuilder.
-                                                                getBar().
-                                                                getWrapper());
+
+                                                bar.progressProperty().bind(task.progressProperty());
+                                                downloadListWrapper.getChildren().add(bar);
+                                                Thread thread = new Thread(task);
+                                                thread.setDaemon(true);
+                                                thread.start();
+
                                             } catch (Exception e) {
                                                 e.printStackTrace();
                                             }

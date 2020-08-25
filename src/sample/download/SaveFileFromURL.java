@@ -45,16 +45,6 @@ public class SaveFileFromURL{
         }
 
         fileChannel = fileOutputStream.getChannel();
-        return new DownloadFileTask(fileChannel, readableByteChannel);
-        /*DownloadProgressTracker progress = new DownloadProgressTracker(fileChannel, readableByteChannel);
-
-        ExecutorService executorService = Executors.newFixedThreadPool(2);
-
-        DownloadFileTask task = new DownloadFileTask(fileChannel, readableByteChannel);
-
-        executorService.execute(progress);
-        executorService.execute(task);
-
-        executorService.shutdown();*/
+        return new DownloadFileTask(fileChannel, readableByteChannel, details.getFileSize());
     };
 }
