@@ -11,14 +11,14 @@ import javafx.scene.layout.Priority;
 public class DownloadItemBar {
 
     private HBox wrapper;
-    private Label downloadStatus = new Label("Awaiting");
+    private Label downloadStatus = new Label("Awaiting"); //TODO add status listener
     private final Label filename;
     private final Button startBtn;
     private final Button pauseBtn;
     private final Button cancelBtn;
     private ProgressBar progressBar;
 
-    public DownloadItemBar(String filename, double fileSize) {
+    public DownloadItemBar(String filename) {
 
         this.wrapper = new HBox(6);
 
@@ -28,7 +28,7 @@ public class DownloadItemBar {
         this.filename.prefWidthProperty().bind(wrapper.widthProperty());
         this.filename.prefHeightProperty().bind(wrapper.heightProperty());
 
-        this.progressBar = new ProgressBar(fileSize);
+        this.progressBar = new ProgressBar();
         this.progressBar.setMinSize(60, 10);
         this.progressBar.setMaxSize(100, 20);
         this.progressBar.prefWidthProperty().bind(wrapper.widthProperty());

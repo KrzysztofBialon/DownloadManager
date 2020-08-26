@@ -8,9 +8,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import sample.DownloadActionBuilder;
-import sample.TaskBuilder;
-import sample.DownloadPoolManager;
 import sample.FileDetailsClass;
+import sample.download.SaveFileFromURL;
 import sample.gui.elements.DownloadItemBar;
 import sample.httpconnection.HTTPConnectionClass;
 
@@ -33,7 +32,7 @@ public class Controller {
     private ComboBox extensionSelectionBox;
 
     private final List<String> extensionList = Arrays.asList("exe", "zip", "pdf", "txt", "mp3", "mp4");
-    private DownloadPoolManager downloadPoolManager = new DownloadPoolManager();
+
     @FXML
     public void initialize()
     {
@@ -48,17 +47,20 @@ public class Controller {
                                         mouseEvent ->
                                         {
                                             try {
-                                                DownloadActionBuilder actionBuilder = new DownloadActionBuilder();
-
-                                                ProgressBar bar = new ProgressBar();
-                                                Task task =
-                                                actionBuilder.build(urlInputField.getText(),
+                                                FileDetailsClass fileDetails = HTTPConnectionClass.setConnection(
+                                                        urlInputField.getText(),
                                                         extensionSelectionBox.
                                                                 getValue().
-                                                                toString());
+                                                                toString()); //return new obj with details
 
-                                                bar.progressProperty().bind(task.progressProperty());
-                                                downloadListWrapper.getChildren().add(bar);
+                                                DownloadItemBar downloadBar = new DownloadItemBar(fileDetails.getFileHeaderName());
+
+                                                Task task = SaveFileFromURL.setDestination(fileDetails);
+
+                                                downloadBar.getProgressBar().progressProperty().bind(task.progressProperty());
+
+                                                downloadListWrapper.getChildren().add(downloadBar.getWrapper());
+                                                //TODO create thread pool for below
                                                 Thread thread = new Thread(task);
                                                 thread.setDaemon(true);
                                                 thread.start();

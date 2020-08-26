@@ -4,6 +4,7 @@ import java.net.URL;
 
 public class FileDetailsClass
 {
+    //TODO default name, fix headername (always null)
     private final String fileHeaderName;
     private final URL fileURL;
     private final Long fileSize;

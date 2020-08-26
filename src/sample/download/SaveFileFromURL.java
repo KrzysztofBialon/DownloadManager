@@ -45,6 +45,7 @@ public class SaveFileFromURL{
         }
 
         fileChannel = fileOutputStream.getChannel();
+
         return new DownloadFileTask(fileChannel, readableByteChannel, details.getFileSize());
     };
 }
