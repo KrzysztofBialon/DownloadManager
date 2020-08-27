@@ -13,17 +13,6 @@ import java.nio.channels.ReadableByteChannel;
 
 public class SaveFileFromURL{
 
-   /* private FileDetailsClass details;
-    private String filename;
-    private String saveFilePath;
-    private FileChannel fileChannel = null;
-    private FileOutputStream fileOutputStream = null;
-    private ReadableByteChannel readableByteChannel = null;
-
-    public SaveFileFromURL(FileDetailsClass details) {
-        this.details = details;
-    }*/
-
     public static DownloadFileTask setDestination(FileDetailsClass details) {
 
         String filename = details.getFileHeaderName()+ "." + details.getExtension();

@@ -1,31 +1,24 @@
 package sample.httpconnection;
 
 import sample.FileDetailsClass;
-
 import javax.net.ssl.HttpsURLConnection;
-import java.net.URL;
 
 public class HTTPConnectionClass {
-
-    /*private URL url;
-    private String extension;
-
-    public HTTPConnectionClass(String url, String ext) throws MalformedURLException {
-        this.url = new URL(url);
-        this.extension = ext;
-    }*/
-
-    public static FileDetailsClass setConnection(String url, String extension) throws Exception
+    public static void setConnection(FileDetailsClass detailsClass) throws Exception
     {
-        URL urlBuilder = new URL(url);
-        HttpsURLConnection httpsURLConnection = (HttpsURLConnection) urlBuilder.openConnection();
+        HttpsURLConnection httpsURLConnection = (HttpsURLConnection) detailsClass.getFileURL().openConnection();
         httpsURLConnection.setRequestMethod("GET");
         httpsURLConnection.connect();
-        if(httpsURLConnection.getResponseCode() != 200) return null;
-        return new FileDetailsClass(httpsURLConnection.getHeaderField(
-                "Content-Disposition"),
-                urlBuilder,
-                httpsURLConnection.getContentLengthLong(),
-                extension);
+
+        if(httpsURLConnection.getResponseCode() / 100 != 2) return;
+
+        detailsClass.
+                setFileHeaderName(
+                        httpsURLConnection.
+                                getHeaderField("Content-Disposition"));
+        detailsClass.
+                setFileSize(
+                        httpsURLConnection.
+                                getContentLengthLong());
     }
 }

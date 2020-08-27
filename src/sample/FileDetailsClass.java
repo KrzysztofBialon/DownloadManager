@@ -1,20 +1,28 @@
 package sample;
 
+import javafx.concurrent.Task;
+import sample.download.SaveFileFromURL;
+import sample.download.file.DownloadFileTask;
+import sample.gui.elements.DownloadItemBar;
+
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public class FileDetailsClass
 {
     //TODO default name, fix headername (always null)
-    private final String fileHeaderName;
     private final URL fileURL;
-    private final Long fileSize;
     private final String extension;
+    private String fileHeaderName;
+    private Long fileSize;;
+    private Task task;
+    private DownloadItemBar bar;
+    private Thread thread;
 
-    public FileDetailsClass(String fileHeaderName, URL fileURL, Long fileSize, String extension) {
-        this.fileHeaderName = fileHeaderName;
-        this.fileURL = fileURL;
-        this.fileSize = fileSize;
+    public FileDetailsClass(String extension, URL url)
+    {
         this.extension = extension;
+        this.fileURL = url;
     }
 
     public String getFileHeaderName() {
@@ -31,5 +39,32 @@ public class FileDetailsClass
 
     public String getExtension() {
         return extension;
+    }
+
+    public Thread getThread() {
+        return thread;
+    }
+
+    public void setFileHeaderName(String fileHeaderName) {
+        this.fileHeaderName = fileHeaderName;
+    }
+
+    public void setFileSize(Long fileSize) {
+        this.fileSize = fileSize;
+    }
+
+    public void setTask() {
+        this.task = SaveFileFromURL.setDestination(this);
+    }
+
+    public void setBar() {
+        this.bar = new DownloadItemBar(fileHeaderName);
+        this.bar.getProgressBar().progressProperty().bind(task.progressProperty());
+    }
+
+    public void setThread()
+    {
+        thread = new Thread(task);
+        thread.setDaemon(true);
     }
 }
