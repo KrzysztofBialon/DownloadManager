@@ -45,6 +45,10 @@ public class FileDetailsClass
         return thread;
     }
 
+    public DownloadItemBar getBar() {
+        return bar;
+    }
+
     public void setFileHeaderName(String fileHeaderName) {
         this.fileHeaderName = fileHeaderName;
     }

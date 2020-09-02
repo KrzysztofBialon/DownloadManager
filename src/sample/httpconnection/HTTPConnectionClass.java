@@ -9,7 +9,6 @@ public class HTTPConnectionClass {
         HttpsURLConnection httpsURLConnection = (HttpsURLConnection) detailsClass.getFileURL().openConnection();
         httpsURLConnection.setRequestMethod("GET");
         httpsURLConnection.connect();
-
         if(httpsURLConnection.getResponseCode() / 100 != 2) return;
 
         detailsClass.

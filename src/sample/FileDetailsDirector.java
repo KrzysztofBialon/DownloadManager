@@ -8,10 +8,10 @@ public class FileDetailsDirector
         this.fileDetailsBuilder = fileDetailsBuilder;
     }
 
-    public void constructFileDetails() throws Exception {
+    public void constructFileDetails()  throws Exception {
         fileDetailsBuilder.createHTTPSConnection();
-        fileDetailsBuilder.createDownloadBar();
         fileDetailsBuilder.createDownloadTask();
+        fileDetailsBuilder.createDownloadBar();
         fileDetailsBuilder.createDownloadThread();
     }
 

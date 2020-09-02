@@ -1,19 +1,13 @@
 package sample.controllers;
 
-import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import sample.DownloadActionBuilder;
 import sample.FileDetailsBuilder;
-import sample.FileDetailsClass;
 import sample.FileDetailsDirector;
-import sample.download.SaveFileFromURL;
-import sample.gui.elements.DownloadItemBar;
-import sample.httpconnection.HTTPConnectionClass;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -55,14 +49,19 @@ public class Controller {
                                             try {
 
                                                 URL url = new URL(urlInputField.getText());
+                                                System.out.println("step1");
                                                 String extension =  extensionSelectionBox.getValue().toString();
-
+                                                System.out.println("step2");
                                                 FileDetailsBuilder fileDetailsBuilder = new FileDetailsBuilder(url, extension);
+                                                System.out.println("step3");
                                                 FileDetailsDirector fileDetailsDirector = new FileDetailsDirector(fileDetailsBuilder);
+                                                System.out.println("step4");
                                                 fileDetailsDirector.constructFileDetails();
-
+                                                System.out.println("step5");
+                                                downloadListWrapper.getChildren().add(fileDetailsDirector.getFileDetailsClass().getBar().getWrapper());
+                                                System.out.println("step6");
                                                 downloadPool.execute(fileDetailsDirector.getFileDetailsClass().getThread());
-
+                                                System.out.println("step7");
                                             } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
