@@ -1,5 +1,8 @@
 package sample;
 
+import java.io.File;
+import java.util.concurrent.Callable;
+
 public class FileDetailsDirector
 {
     private FileDetailsBuilder fileDetailsBuilder;
@@ -8,7 +11,7 @@ public class FileDetailsDirector
         this.fileDetailsBuilder = fileDetailsBuilder;
     }
 
-    public void constructFileDetails()  throws Exception {
+    public void constructFileDetails() throws Exception {
         fileDetailsBuilder.createHTTPSConnection();
         fileDetailsBuilder.createDownloadTask();
         fileDetailsBuilder.createDownloadBar();

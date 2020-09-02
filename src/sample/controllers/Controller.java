@@ -1,5 +1,6 @@
 package sample.controllers;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -9,6 +10,7 @@ import javafx.scene.layout.VBox;
 import sample.FileDetailsBuilder;
 import sample.FileDetailsDirector;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
@@ -47,21 +49,35 @@ public class Controller {
                                         mouseEvent ->
                                         {
                                             try {
+                                                Runnable runnable =() -> {
+                                                    URL url = null;
+                                                    try {
+                                                        url = new URL(urlInputField.getText());
+                                                    } catch (MalformedURLException e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                    System.out.println("step1");
+                                                    String extension = extensionSelectionBox.getValue().toString();
+                                                    System.out.println("step2");
+                                                    FileDetailsBuilder fileDetailsBuilder = new FileDetailsBuilder(url, extension);
+                                                    System.out.println("step3");
+                                                    FileDetailsDirector fileDetailsDirector = new FileDetailsDirector(fileDetailsBuilder);
+                                                    System.out.println("step4");
+                                                    try {
+                                                        fileDetailsDirector.constructFileDetails();
+                                                    } catch (Exception e) {
+                                                        e.printStackTrace();
+                                                    }
+                                                    System.out.println("step5");
+                                                    Platform.runLater(() -> downloadListWrapper.getChildren().add(fileDetailsDirector.getFileDetailsClass().getBar().getWrapper()));
+                                                    System.out.println("step6");
+                                                    downloadPool.execute(fileDetailsDirector.getFileDetailsClass().getThread());
+                                                    System.out.println("step7");
+                                                };
+                                                Thread thread = new Thread(runnable);
+                                                thread.setDaemon(true);
+                                                thread.start();
 
-                                                URL url = new URL(urlInputField.getText());
-                                                System.out.println("step1");
-                                                String extension =  extensionSelectionBox.getValue().toString();
-                                                System.out.println("step2");
-                                                FileDetailsBuilder fileDetailsBuilder = new FileDetailsBuilder(url, extension);
-                                                System.out.println("step3");
-                                                FileDetailsDirector fileDetailsDirector = new FileDetailsDirector(fileDetailsBuilder);
-                                                System.out.println("step4");
-                                                fileDetailsDirector.constructFileDetails();
-                                                System.out.println("step5");
-                                                downloadListWrapper.getChildren().add(fileDetailsDirector.getFileDetailsClass().getBar().getWrapper());
-                                                System.out.println("step6");
-                                                downloadPool.execute(fileDetailsDirector.getFileDetailsClass().getThread());
-                                                System.out.println("step7");
                                             } catch (Exception e) {
                                                 e.printStackTrace();
                                             }
