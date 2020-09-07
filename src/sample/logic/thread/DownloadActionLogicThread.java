@@ -1,9 +1,10 @@
-package sample;
+package sample.logic.thread;
 
 import javafx.application.Platform;
 import javafx.scene.layout.VBox;
+import sample.logic.construct.FileclassConstructors.FileDetailsBuilder;
+import sample.logic.construct.FileclassConstructors.FileDetailsDirector;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

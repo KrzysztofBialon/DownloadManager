@@ -1,4 +1,4 @@
-package sample.gui.elements;
+package sample.gui.elements.download.bar;
 
 import javafx.scene.Node;
 import javafx.scene.control.Button;

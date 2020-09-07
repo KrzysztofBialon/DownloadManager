@@ -1,8 +1,8 @@
-package sample;
+package sample.logic.util.fileClass;
 
 import javafx.concurrent.Task;
 import sample.download.SaveFileFromURL;
-import sample.gui.elements.DownloadItemBar;
+import sample.gui.elements.download.bar.DownloadItemBar;
 
 import java.net.URL;
 

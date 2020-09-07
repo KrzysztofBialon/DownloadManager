@@ -1,10 +1,11 @@
-package sample;
+package sample.logic.event;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
+import sample.logic.thread.DownloadActionLogicThread;
 
 import java.net.MalformedURLException;
 import java.net.URL;

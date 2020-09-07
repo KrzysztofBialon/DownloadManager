@@ -1,4 +1,4 @@
-package sample;
+package sample.logic.interfaces;
 
 public interface IFileDetailsBuilder
 {

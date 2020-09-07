@@ -1,6 +1,8 @@
 package sample.download;
 
-import sample.FileDetailsClass;
+import javafx.application.Platform;
+import sample.gui.elements.alert.InformationAlert;
+import sample.logic.util.fileClass.FileDetailsClass;
 import sample.download.file.DownloadFileTask;
 
 import java.io.File;
@@ -24,7 +26,11 @@ public class SaveFileFromURL{
         try {
             readableByteChannel = Channels.newChannel(details.getFileURL().openStream());
         } catch (IOException e) {
-            e.printStackTrace();;
+            Platform.runLater(()->{
+                InformationAlert informationAlert = new InformationAlert("Cannot open connection",
+                        "There is no files to download under given URL. Check URL.");
+                informationAlert.showAndWait();
+            });
         }
 
         try {

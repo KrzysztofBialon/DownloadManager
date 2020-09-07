@@ -1,6 +1,6 @@
 package sample.httpconnection;
 
-import sample.FileDetailsClass;
+import sample.logic.util.fileClass.FileDetailsClass;
 import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
 

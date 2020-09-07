@@ -1,6 +1,8 @@
-package sample;
+package sample.logic.construct.FileclassConstructors;
 
 import sample.httpconnection.HTTPConnectionClass;
+import sample.logic.interfaces.IFileDetailsBuilder;
+import sample.logic.util.fileClass.FileDetailsClass;
 
 import java.net.URL;
 
