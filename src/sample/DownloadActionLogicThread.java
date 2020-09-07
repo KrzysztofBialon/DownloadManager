@@ -1,0 +1,30 @@
+package sample;
+
+import javafx.application.Platform;
+import javafx.scene.layout.VBox;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+public class DownloadActionLogicThread
+{
+    private static ExecutorService downloadPool = Executors.newFixedThreadPool(2);
+    public static Runnable downloadActionThread(URL url, String extension, VBox downloadListWrapper)
+    {
+        Runnable runnable =() -> {
+            FileDetailsBuilder fileDetailsBuilder = new FileDetailsBuilder(url, extension);
+            FileDetailsDirector fileDetailsDirector = new FileDetailsDirector(fileDetailsBuilder);
+
+            try {
+                fileDetailsDirector.constructFileDetails();
+            } catch (Exception e) {
+                return;
+            }
+            Platform.runLater(() -> downloadListWrapper.getChildren().add(fileDetailsDirector.getFileDetailsClass().getBar().getWrapper()));
+            downloadPool.execute(fileDetailsDirector.getFileDetailsClass().getThread());
+        };
+        return runnable;
+    }
+}

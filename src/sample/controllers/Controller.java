@@ -7,6 +7,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import sample.DownloadActionLogicThread;
 import sample.FileDetailsBuilder;
 import sample.FileDetailsDirector;
 
@@ -33,57 +34,36 @@ public class Controller {
     private ComboBox extensionSelectionBox;
 
     private final List<String> extensionList = Arrays.asList("exe", "zip", "pdf", "txt", "mp3", "mp4");
-    private ExecutorService downloadPool = Executors.newFixedThreadPool(5);
+    private ExecutorService downloadPool1 = Executors.newFixedThreadPool(2);
 
     @FXML
-    public void initialize()
-    {
-        contentWrapper.setMaxSize(800, 800);
+    public void initialize() {
 
+        contentWrapper.setMaxSize(800, 800);
         topBarContainer.prefWidthProperty().bind(contentWrapper.widthProperty());
         //Initialize extension box with ext list
         extensionSelectionBox.getItems().setAll(extensionList);
         extensionSelectionBox.setValue(extensionList.get(0));
         //Add functionality to startDownload button
         startDownloadBtn.addEventHandler(MouseEvent.MOUSE_CLICKED,
-                                        mouseEvent ->
-                                        {
-                                            try {
-                                                Runnable runnable =() -> {
-                                                    URL url = null;
-                                                    try {
-                                                        url = new URL(urlInputField.getText());
-                                                    } catch (MalformedURLException e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                    System.out.println("step1");
-                                                    String extension = extensionSelectionBox.getValue().toString();
-                                                    System.out.println("step2");
-                                                    FileDetailsBuilder fileDetailsBuilder = new FileDetailsBuilder(url, extension);
-                                                    System.out.println("step3");
-                                                    FileDetailsDirector fileDetailsDirector = new FileDetailsDirector(fileDetailsBuilder);
-                                                    System.out.println("step4");
-                                                    try {
-                                                        fileDetailsDirector.constructFileDetails();
-                                                    } catch (Exception e) {
-                                                        e.printStackTrace();
-                                                    }
-                                                    System.out.println("step5");
-                                                    Platform.runLater(() -> downloadListWrapper.getChildren().add(fileDetailsDirector.getFileDetailsClass().getBar().getWrapper()));
-                                                    System.out.println("step6");
-                                                    downloadPool.execute(fileDetailsDirector.getFileDetailsClass().getThread());
-                                                    System.out.println("step7");
-                                                };
-                                                Thread thread = new Thread(runnable);
-                                                thread.setDaemon(true);
-                                                thread.start();
+                mouseEvent ->
+                {
+                    URL url;
+                    try {
+                        url = new URL(urlInputField.getText());
+                    } catch (MalformedURLException e) {
+                        urlInputField.setStyle("-fx-border-color: red");
+                        return;
+                    }
 
-                                            } catch (Exception e) {
-                                                e.printStackTrace();
-                                            }
-                                        });
+                    String extension = extensionSelectionBox.getValue().toString();
+
+                    Thread thread = new Thread(DownloadActionLogicThread.
+                            downloadActionThread(url, extension, downloadListWrapper));
+
+                    downloadPool1.execute(thread);
+                });
     }
-
 
 
 }

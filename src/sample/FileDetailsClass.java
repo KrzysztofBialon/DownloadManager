@@ -2,10 +2,8 @@ package sample;
 
 import javafx.concurrent.Task;
 import sample.download.SaveFileFromURL;
-import sample.download.file.DownloadFileTask;
 import sample.gui.elements.DownloadItemBar;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class FileDetailsClass
