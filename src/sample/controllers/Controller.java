@@ -45,24 +45,6 @@ public class Controller {
                 extensionSelectionBox,
                 downloadListWrapper,
                 downloadUserActionThreadPool));
-                /*mouseEvent ->
-                {
-                    //Create URL if malformed inform user and quit method
-                    URL url;
-                    try {
-                        url = new URL(urlInputField.getText());
-                    } catch (MalformedURLException e) {
-                        urlInputField.setStyle("-fx-border-color: red");
-                        return;
-                    }
-
-                    String extension = extensionSelectionBox.getValue().toString();
-
-                    Thread downloadAction = new Thread(DownloadActionLogicThread.
-                            downloadActionThread(url, extension, downloadListWrapper));
-
-                    downloadUserActionThreadPool.execute(downloadAction);
-                });*/
     }
 
 

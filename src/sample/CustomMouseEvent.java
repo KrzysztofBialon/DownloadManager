@@ -16,6 +16,7 @@ public class CustomMouseEvent implements EventHandler {
     private ComboBox extensionSelectionBox;
     private VBox downloadListWrapper;
     private ExecutorService downloadUserActionThreadPool;
+    private URL url = null;
 
     public CustomMouseEvent(TextField urlInputField, ComboBox extensionSelectionBox, VBox downloadListWrapper, ExecutorService downloadUserActionThreadPool) {
         this.urlInputField = urlInputField;
@@ -28,7 +29,6 @@ public class CustomMouseEvent implements EventHandler {
     public void handle(Event event)
     {
         //Create URL if malformed inform user and quit method
-        URL url;
         try {
             url = new URL(urlInputField.getText());
         } catch (MalformedURLException e) {
