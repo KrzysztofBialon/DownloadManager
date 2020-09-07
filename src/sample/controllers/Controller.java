@@ -1,18 +1,13 @@
 package sample.controllers;
 
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import sample.DownloadActionLogicThread;
-import sample.FileDetailsBuilder;
-import sample.FileDetailsDirector;
+import sample.CustomMouseEvent;
 
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -34,8 +29,8 @@ public class Controller {
     private ComboBox extensionSelectionBox;
 
     private final List<String> extensionList = Arrays.asList("exe", "zip", "pdf", "txt", "mp3", "mp4");
-    private ExecutorService downloadPool1 = Executors.newFixedThreadPool(2);
 
+    private final ExecutorService downloadUserActionThreadPool = Executors.newFixedThreadPool(2);
     @FXML
     public void initialize() {
 
@@ -45,9 +40,14 @@ public class Controller {
         extensionSelectionBox.getItems().setAll(extensionList);
         extensionSelectionBox.setValue(extensionList.get(0));
         //Add functionality to startDownload button
-        startDownloadBtn.addEventHandler(MouseEvent.MOUSE_CLICKED,
-                mouseEvent ->
+        startDownloadBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, new CustomMouseEvent(
+                urlInputField,
+                extensionSelectionBox,
+                downloadListWrapper,
+                downloadUserActionThreadPool));
+                /*mouseEvent ->
                 {
+                    //Create URL if malformed inform user and quit method
                     URL url;
                     try {
                         url = new URL(urlInputField.getText());
@@ -58,11 +58,11 @@ public class Controller {
 
                     String extension = extensionSelectionBox.getValue().toString();
 
-                    Thread thread = new Thread(DownloadActionLogicThread.
+                    Thread downloadAction = new Thread(DownloadActionLogicThread.
                             downloadActionThread(url, extension, downloadListWrapper));
 
-                    downloadPool1.execute(thread);
-                });
+                    downloadUserActionThreadPool.execute(downloadAction);
+                });*/
     }
 
 
