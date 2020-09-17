@@ -26,7 +26,7 @@ public class SaveFileFromURL{
         try {
             readableByteChannel = Channels.newChannel(details.getFileURL().openStream());
         } catch (IOException e) {
-            Platform.runLater(()->{
+            Platform.runLater(()->{//TODO implement alrts
                 InformationAlert informationAlert = new InformationAlert("Cannot open connection",
                         "There is no files to download under given URL. Check URL.");
                 informationAlert.showAndWait();
