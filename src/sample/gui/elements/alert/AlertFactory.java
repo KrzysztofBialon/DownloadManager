@@ -11,6 +11,7 @@ public class AlertFactory
     {
         {
             put("CantCreateFileAlert", new CantCreateFileAlert());
+            put("CouldntConnectToServerAlert", new CouldntConnectToServerAlert());
             put("FileNotFoundAlert", new FileNotFoundAlert());
             put("NoResourceIOAlert", new NoResourceIOAlert());
             put("ProtocolAlert", new ProtocolAlert());

@@ -4,6 +4,8 @@ import javafx.application.Platform;
 import sample.gui.elements.alert.AlertFactory;
 import sample.logic.util.fileClass.FileDetailsClass;
 
+import java.io.IOException;
+
 public class FileDetailsDirector
 {
     private FileDetailsBuilder fileDetailsBuilder;
@@ -12,7 +14,7 @@ public class FileDetailsDirector
         this.fileDetailsBuilder = fileDetailsBuilder;
     }
 
-    public void constructFileDetails(){
+    public void constructFileDetails() throws IOException {
 
         try
         {

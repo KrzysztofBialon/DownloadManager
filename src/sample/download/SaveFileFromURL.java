@@ -17,27 +17,26 @@ public class SaveFileFromURL{
 
     public static DownloadFileTask setDestination(FileDetailsClass details) throws IOException {
 
-        /*String filename = details.getFileHeaderName()+ "." + details.getExtension();
-        String saveFilePath = "C:/Users/User/Downloads" + File.separator + filename;*/ //TODO add file creator method
         File file = FileCreator.createFile(details);
-        FileOutputStream fileOutputStream = null;
-        ReadableByteChannel readableByteChannel = null;
+        FileOutputStream fileOutputStream;
+        ReadableByteChannel readableByteChannel;
         FileChannel fileChannel;
 
         try {
             readableByteChannel = Channels.newChannel(details.getFileURL().openStream());
         } catch (IOException e) {
             Platform.runLater(()-> AlertFactory.createAlert("NoResourceIOAlert").showAndWait());
+            return null;
         }
 
         try {
             fileOutputStream = new FileOutputStream(file);
         } catch (FileNotFoundException e) {
             Platform.runLater(()-> AlertFactory.createAlert("FileNotFoundAlert").showAndWait());
+            return null;
         }
 
         fileChannel = fileOutputStream.getChannel();
-
-        return new DownloadFileTask(fileChannel, readableByteChannel, details.getFileSize());
+        return new DownloadFileTask(fileChannel, readableByteChannel, details);
     };
 }

@@ -4,11 +4,12 @@ import javafx.concurrent.Task;
 import sample.download.SaveFileFromURL;
 import sample.gui.elements.download.bar.DownloadItemBar;
 
+import java.io.IOException;
 import java.net.URL;
 
 public class FileDetailsClass
 {
-    //TODO default name, fix headername (always null)
+    //TODO fix headername (always null)
     private final URL fileURL;
     private final String extension;
     private String fileHeaderName;
@@ -55,7 +56,8 @@ public class FileDetailsClass
         this.fileSize = fileSize;
     }
 
-    public void setTask() {
+    public void setTask() throws IOException
+    {
         this.task = SaveFileFromURL.setDestination(this);
     }
 

@@ -18,10 +18,10 @@ public class DownloadActionLogicThread
         Runnable runnable =() -> {
             FileDetailsBuilder fileDetailsBuilder = new FileDetailsBuilder(url, extension);
             FileDetailsDirector fileDetailsDirector = new FileDetailsDirector(fileDetailsBuilder);
-
             try {
                 fileDetailsDirector.constructFileDetails();
             } catch (Exception e) {
+                e.printStackTrace();
                 return;
             }
             Platform.runLater(() -> downloadListWrapper.getChildren().add(fileDetailsDirector.getFileDetailsClass().getBar().getWrapper()));

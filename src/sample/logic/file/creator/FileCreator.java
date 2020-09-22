@@ -13,6 +13,7 @@ public class FileCreator
         String filename = details.getFileHeaderName() + "." + details.getExtension();
 
         while (true) {
+
             File file = new File("C:/Users/User/Downloads" + File.separator + filename);
             if (file.createNewFile())  return file;
 

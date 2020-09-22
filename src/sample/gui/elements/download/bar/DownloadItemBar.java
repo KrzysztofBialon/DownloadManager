@@ -1,17 +1,14 @@
 package sample.gui.elements.download.bar;
 
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
-import javafx.scene.layout.Border;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
 
 public class DownloadItemBar {
 
     private HBox wrapper;
-    private Label downloadStatus = new Label("Awaiting"); //TODO add status listener
+    private Label downloadStatus = new Label("Awaiting");//TODO add status listener
     private final Label filename;
     private final Button startBtn;
     private final Button pauseBtn;
@@ -58,6 +55,10 @@ public class DownloadItemBar {
 
     public HBox getWrapper() {
         return wrapper;
+    }
+
+    public Label getDownloadStatus() {
+        return downloadStatus;
     }
 
     public ProgressBar getProgressBar(){return progressBar;}

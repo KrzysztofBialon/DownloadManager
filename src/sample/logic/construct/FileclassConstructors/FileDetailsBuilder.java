@@ -4,6 +4,7 @@ import sample.httpconnection.HTTPConnectionClass;
 import sample.logic.interfaces.IFileDetailsBuilder;
 import sample.logic.util.fileClass.FileDetailsClass;
 
+import java.io.IOException;
 import java.net.URL;
 
 public class FileDetailsBuilder implements IFileDetailsBuilder
@@ -27,8 +28,7 @@ public class FileDetailsBuilder implements IFileDetailsBuilder
     }
 
     @Override
-    public void createDownloadTask()
-    {
+    public void createDownloadTask() throws IOException {
         fileDetailsClass.setTask();
     }
 
