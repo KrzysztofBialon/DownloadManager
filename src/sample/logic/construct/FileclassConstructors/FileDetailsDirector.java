@@ -1,7 +1,7 @@
 package sample.logic.construct.FileclassConstructors;
 
 import javafx.application.Platform;
-import sample.gui.elements.alert.InformationAlert;
+import sample.gui.elements.alert.AlertFactory;
 import sample.logic.util.fileClass.FileDetailsClass;
 
 public class FileDetailsDirector
@@ -14,15 +14,12 @@ public class FileDetailsDirector
 
     public void constructFileDetails(){
 
-        try {
+        try
+        {
             fileDetailsBuilder.createHTTPSConnection();
-        } catch (Exception e) {
-            Platform.runLater(()->{
-                InformationAlert informationAlert = new InformationAlert("Connection issue",
-                        "Server not responding correctly.");
-                informationAlert.showAndWait();
-            });
-            System.out.println("Connection issue"); //TODO show alert
+        } catch (Exception e)
+        {
+            Platform.runLater(()-> AlertFactory.createAlert("ProtocolAlert"));
             return;
         }
         fileDetailsBuilder.createDownloadTask();
