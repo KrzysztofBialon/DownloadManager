@@ -12,6 +12,7 @@ import java.util.concurrent.Executors;
 public class DownloadActionLogicThread
 {
     private static ExecutorService downloadPool = Executors.newFixedThreadPool(2);
+
     public static Runnable downloadActionThread(URL url, String extension, VBox downloadListWrapper)
     {
         Runnable runnable =() -> {

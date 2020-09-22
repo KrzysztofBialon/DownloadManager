@@ -30,8 +30,6 @@ public class CustomMouseEvent implements EventHandler {
     @Override
     public void handle(Event event) {
         {
-            Platform.runLater(() -> AlertFactory.createAlert("FileNotFoundAlert").showAndWait());
-
             //Create URL if malformed inform user and quit method
             try {
                 url = new URL(urlInputField.getText());
