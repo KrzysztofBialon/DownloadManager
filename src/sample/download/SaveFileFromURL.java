@@ -4,7 +4,7 @@ import javafx.application.Platform;
 import sample.gui.elements.alert.AlertFactory;
 import sample.logic.file.creator.FileCreator;
 import sample.logic.util.fileClass.FileDetailsClass;
-import sample.download.file.DownloadFileTask;
+import sample.logic.thread.DownloadFileTask;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

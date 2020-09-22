@@ -6,7 +6,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import sample.logic.event.CustomMouseEvent;
+import sample.logic.event.DownloadButtonEvent;
 
 import java.util.Arrays;
 import java.util.List;
@@ -41,7 +41,7 @@ public class Controller {
         extensionSelectionBox.setValue(extensionList.get(0));
         //Add functionality to startDownload button
         //TODO if waiting too long for download cancel, check time waiting for connection
-        startDownloadBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, new CustomMouseEvent(
+        startDownloadBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, new DownloadButtonEvent(
                 urlInputField,
                 extensionSelectionBox,
                 downloadListWrapper,

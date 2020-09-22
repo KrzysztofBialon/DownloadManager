@@ -18,6 +18,7 @@ public class FileCreator
             if (file.createNewFile())  return file;
 
             filename = UUID.randomUUID() + "." + details.getExtension();
+            details.setFileHeaderName(filename);
         }
     }
 }

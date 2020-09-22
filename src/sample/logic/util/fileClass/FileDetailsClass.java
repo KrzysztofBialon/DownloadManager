@@ -3,6 +3,7 @@ package sample.logic.util.fileClass;
 import javafx.concurrent.Task;
 import sample.download.SaveFileFromURL;
 import sample.gui.elements.download.bar.DownloadItemBar;
+import sample.logic.event.CancelDownloadEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -17,6 +18,7 @@ public class FileDetailsClass
     private Task task;
     private DownloadItemBar bar;
     private Thread thread;
+    private CancelDownloadEvent cancelDownloadEvent;
 
     public FileDetailsClass(String extension, URL url)
     {
@@ -62,8 +64,8 @@ public class FileDetailsClass
     }
 
     public void setBar() {
-        this.bar = new DownloadItemBar(fileHeaderName);
-        this.bar.getProgressBar().progressProperty().bind(task.progressProperty());
+        this.bar = new DownloadItemBar(fileHeaderName, task);
+        //this.bar.getProgressBar().progressProperty().bind(task.progressProperty());
     }
 
     public void setThread()

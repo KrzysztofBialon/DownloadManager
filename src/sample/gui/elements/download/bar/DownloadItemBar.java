@@ -1,21 +1,24 @@
 package sample.gui.elements.download.bar;
 
+import javafx.concurrent.Task;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import sample.logic.event.CancelDownloadEvent;
 
 public class DownloadItemBar {
 
     private HBox wrapper;
     private Label downloadStatus = new Label("Awaiting");//TODO add status listener
     private final Label filename;
-    private final Button startBtn;
-    private final Button pauseBtn;
-    private final Button cancelBtn;
+    private final Button startBtn; //TODO resume
+    private final Button pauseBtn; //TODO pasue action
+    private final Button cancelBtn; //TODO pasue action, remove file
     private ProgressBar progressBar;
 
-    public DownloadItemBar(String filename) {
+    public DownloadItemBar(String filename, Task task) {
 
         this.wrapper = new HBox(6);
 
@@ -30,6 +33,7 @@ public class DownloadItemBar {
         this.progressBar.setMaxSize(100, 20);
         this.progressBar.prefWidthProperty().bind(wrapper.widthProperty());
         this.progressBar.prefHeightProperty().bind(wrapper.heightProperty());
+        this.progressBar.progressProperty().bind(task.progressProperty());
 
         this.startBtn = new Button("S");
         this.startBtn.setMinSize(60, 20);
@@ -48,6 +52,7 @@ public class DownloadItemBar {
         this.cancelBtn.setMaxSize(100, 20);
         this.cancelBtn.prefWidthProperty().bind(wrapper.widthProperty());
         this.cancelBtn.prefHeightProperty().bind(wrapper.heightProperty());
+        this.cancelBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, new CancelDownloadEvent(task, filename));
 
         wrapper.getChildren().setAll(
                 this.filename, progressBar, downloadStatus, startBtn, pauseBtn, cancelBtn);

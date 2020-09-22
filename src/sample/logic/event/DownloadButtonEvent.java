@@ -12,7 +12,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.concurrent.ExecutorService;
 
-public class CustomMouseEvent implements EventHandler {
+public class DownloadButtonEvent implements EventHandler {
 
     private TextField urlInputField;
     private ComboBox extensionSelectionBox;
@@ -20,7 +20,7 @@ public class CustomMouseEvent implements EventHandler {
     private ExecutorService downloadUserActionThreadPool;
     private URL url = null;
 
-    public CustomMouseEvent(TextField urlInputField, ComboBox extensionSelectionBox, VBox downloadListWrapper, ExecutorService downloadUserActionThreadPool) {
+    public DownloadButtonEvent(TextField urlInputField, ComboBox extensionSelectionBox, VBox downloadListWrapper, ExecutorService downloadUserActionThreadPool) {
         this.urlInputField = urlInputField;
         this.extensionSelectionBox = extensionSelectionBox;
         this.downloadListWrapper = downloadListWrapper;
