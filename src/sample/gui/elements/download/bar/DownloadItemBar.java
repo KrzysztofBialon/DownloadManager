@@ -7,6 +7,7 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import sample.logic.event.CancelDownloadEvent;
+import sample.logic.event.PauseDownloadEvent;
 
 public class DownloadItemBar {
 
@@ -46,6 +47,7 @@ public class DownloadItemBar {
         this.pauseBtn.setMaxSize(100, 20);
         this.pauseBtn.prefWidthProperty().bind(wrapper.widthProperty());
         this.pauseBtn.prefHeightProperty().bind(wrapper.heightProperty());
+        this.pauseBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, new PauseDownloadEvent(task));
 
         this.cancelBtn = new Button("C");
         this.cancelBtn.setMinSize(60, 20);
