@@ -18,7 +18,8 @@ public class FileDetailsBuilder implements IFileDetailsBuilder
 
     @Override
     public void createHTTPSConnection() throws Exception {
-        HTTPConnectionClass.setConnection(fileDetailsClass);
+        new HTTPConnectionClass().setConnection(fileDetailsClass);
+
     }
 
     @Override

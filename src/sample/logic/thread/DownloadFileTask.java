@@ -27,15 +27,17 @@ public class DownloadFileTask extends Task {
     protected Void call(){
         try
         {
+            Platform.runLater(()->details.getBar().getDownloadStatus().setText("Downloading"));
+
             for(long pos = 0; pos < fileSize; pos += 32)
             {
-                Platform.runLater(()->details.getBar().getDownloadStatus().setText("Downloading"));
                 try
                 {
                     fileChannel.transferFrom(readableByteChannel, pos, Long.MAX_VALUE);
                 }
                 catch (ClosedChannelException e)
                 {
+                    e.printStackTrace();
                     return null;
                 }
                 updateProgress(pos, fileSize);

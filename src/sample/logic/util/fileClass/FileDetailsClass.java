@@ -14,11 +14,11 @@ public class FileDetailsClass
     private final URL fileURL;
     private final String extension;
     private String fileHeaderName;
-    private Long fileSize;;
+    private long fileSize;;
+    private long currentFilesize = 0;
     private Task task;
     private DownloadItemBar bar;
     private Thread thread;
-    private CancelDownloadEvent cancelDownloadEvent;
 
     public FileDetailsClass(String extension, URL url)
     {
@@ -50,12 +50,12 @@ public class FileDetailsClass
         return bar;
     }
 
-    public void setFileHeaderName(String fileHeaderName) {
-        this.fileHeaderName = fileHeaderName;
+    public long getCurrentFilesize() {
+        return currentFilesize;
     }
 
-    public void setFileSize(Long fileSize) {
-        this.fileSize = fileSize;
+    public void setFileHeaderName(String fileHeaderName) {
+        this.fileHeaderName = fileHeaderName;
     }
 
     public void setTask() throws IOException
@@ -72,5 +72,13 @@ public class FileDetailsClass
     {
         thread = new Thread(task);
         thread.setDaemon(true);
+    }
+
+    public void setFileSize(long fileSize) {
+        this.fileSize = fileSize;
+    }
+
+    public void setCurrentFilesize(long currentFilesize) {
+        this.currentFilesize = currentFilesize;
     }
 }
