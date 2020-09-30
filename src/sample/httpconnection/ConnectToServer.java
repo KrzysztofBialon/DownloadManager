@@ -11,6 +11,7 @@ public class ConnectToServer
     public static void connect(FileDetailsClass detailsClass, boolean isResume) throws IOException {
         //TODO rethink resuming
         HttpsURLConnection httpsURLConnection = (HttpsURLConnection) detailsClass.getFileURL().openConnection();
+        httpsURLConnection.setConnectTimeout(5000);
         if (isResume) httpsURLConnection.setRequestProperty("Range", "bytes="+(detailsClass.getCurrentFilesize())+"-");
         httpsURLConnection.setRequestMethod("GET");
         httpsURLConnection.connect();

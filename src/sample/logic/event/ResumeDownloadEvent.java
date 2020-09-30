@@ -3,6 +3,8 @@ package sample.logic.event;
 import javafx.concurrent.Task;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import sample.httpconnection.ResumeDownloadHTTPCon;
+
 import java.io.File;
 
 public class ResumeDownloadEvent implements EventHandler
@@ -19,16 +21,7 @@ public class ResumeDownloadEvent implements EventHandler
     @Override
     public void handle(Event event)
     {
-
-        File file = new File("C:/Users/User/Downloads" + File.separator + filename);
-        if(file.exists())
-        {
-            long fileSize = file.length();
-        } else
-        {
-            System.out.println("C:/Users/User/Downloads" + File.separator + filename);
-            System.out.println("File no longer exists.");//TODO add alert
-        }
-
+        //TODO resume get existing bar, update it, link existing elements
+        //new ResumeDownloadHTTPCon().setConnection();
     }
 }

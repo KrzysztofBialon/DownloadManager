@@ -15,8 +15,8 @@ public class DownloadItemBar {
     private Label downloadStatus = new Label("Awaiting");//TODO add status listener
     private final Label filename;
     private final Button startBtn; //TODO resume
-    private final Button pauseBtn; //TODO pasue action
-    private final Button cancelBtn; //TODO pasue action, remove file
+    private final Button pauseBtn;
+    private final Button cancelBtn;
     private ProgressBar progressBar;
 
     public DownloadItemBar(String filename, Task task) {
