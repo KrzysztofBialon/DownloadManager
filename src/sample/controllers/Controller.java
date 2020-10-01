@@ -47,6 +47,4 @@ public class Controller {
                 downloadListWrapper,
                 downloadUserActionThreadPool));
     }
-
-
 }

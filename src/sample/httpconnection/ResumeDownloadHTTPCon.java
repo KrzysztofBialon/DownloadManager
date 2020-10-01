@@ -1,6 +1,6 @@
 package sample.httpconnection;
 
-import sample.logic.CheckFileSize;
+import sample.logic.files.CheckFileSize;
 import sample.logic.interfaces.IHTTPConnection;
 import sample.logic.util.fileClass.FileDetailsClass;
 import java.io.IOException;

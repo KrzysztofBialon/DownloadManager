@@ -1,4 +1,4 @@
-package sample.logic;
+package sample.logic.files;
 
 import java.io.File;
 
