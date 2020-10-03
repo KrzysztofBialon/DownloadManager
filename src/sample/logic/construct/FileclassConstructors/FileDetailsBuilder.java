@@ -13,7 +13,9 @@ public class FileDetailsBuilder implements IFileDetailsBuilder
 
     public FileDetailsBuilder(URL url, String extension)
     {
-        this.fileDetailsClass = new FileDetailsClass(extension, url);
+        this.fileDetailsClass = new FileDetailsClass();
+        this.fileDetailsClass.setFileURL(url);
+        this.fileDetailsClass.setExtension(extension);
     }
 
     @Override

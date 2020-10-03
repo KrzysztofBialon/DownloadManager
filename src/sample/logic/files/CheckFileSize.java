@@ -7,7 +7,6 @@ public class CheckFileSize
     public static long checkSize(String filename)
     {
         File searchFile = new File("C:/Users/User/Downloads" + File.separator + filename);
-
-        return searchFile.exists() ? searchFile.length() : 0;
+        return searchFile.exists() ? searchFile.length() : null;
     }
 }

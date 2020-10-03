@@ -11,8 +11,8 @@ import java.net.URL;
 public class FileDetailsClass
 {
     //TODO fix headername (always null)
-    private final URL fileURL;
-    private final String extension;
+    private URL fileURL;
+    private String extension;
     private String fileHeaderName;
     private long fileSize;;
     private long currentFilesize = 0;
@@ -20,11 +20,7 @@ public class FileDetailsClass
     private DownloadItemBar bar;
     private Thread thread;
 
-    public FileDetailsClass(String extension, URL url)
-    {
-        this.extension = extension;
-        this.fileURL = url;
-    }
+
 
     public String getFileHeaderName() {
         return fileHeaderName;
@@ -52,6 +48,14 @@ public class FileDetailsClass
 
     public long getCurrentFilesize() {
         return currentFilesize;
+    }
+
+    public void setFileURL(URL fileURL) {
+        this.fileURL = fileURL;
+    }
+
+    public void setExtension(String extension) {
+        this.extension = extension;
     }
 
     public void setFileHeaderName(String fileHeaderName) {
