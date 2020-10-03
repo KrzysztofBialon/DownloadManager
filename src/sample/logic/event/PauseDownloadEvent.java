@@ -16,6 +16,7 @@ public class PauseDownloadEvent implements EventHandler
     @Override
     public void handle(Event event)
     {
+
         downloadTask.cancel();
     }
 }

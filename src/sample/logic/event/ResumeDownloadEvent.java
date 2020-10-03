@@ -9,14 +9,6 @@ import java.io.File;
 
 public class ResumeDownloadEvent implements EventHandler
 {
-    private final Task downloadTask;
-    private final String filename;
-
-    public ResumeDownloadEvent(Task downloadTask, String filename) {
-        this.downloadTask = downloadTask;
-        this.filename = filename;
-
-    }
 
     @Override
     public void handle(Event event)
