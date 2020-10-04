@@ -1,6 +1,7 @@
 package sample.controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -46,5 +47,7 @@ public class Controller {
                 extensionSelectionBox,
                 downloadListWrapper,
                 downloadUserActionThreadPool));
+        //TODO initialize list with pasued downloads
+        downloadListWrapper.getChildren().addAll(/*nodelist*/);
     }
 }

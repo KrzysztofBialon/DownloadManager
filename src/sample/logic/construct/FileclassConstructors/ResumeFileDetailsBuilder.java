@@ -1,13 +1,14 @@
 package sample.logic.construct.FileclassConstructors;
 
 import sample.httpconnection.NewHTTPConnectionClass;
+import sample.httpconnection.ResumeDownloadHTTPCon;
 import sample.logic.interfaces.IFileDetailsBuilder;
 import sample.logic.util.fileClass.FileDetailsClass;
 
 import java.io.IOException;
 import java.net.URL;
 
-public class FileDetailsBuilder implements IFileDetailsBuilder
+public class ResumeFileDetailsBuilder implements IFileDetailsBuilder
 {
     private FileDetailsClass fileDetailsClass;
 
@@ -21,7 +22,7 @@ public class FileDetailsBuilder implements IFileDetailsBuilder
 
     @Override
     public void createHTTPSConnection() throws Exception {
-        new NewHTTPConnectionClass().setConnection(fileDetailsClass);
+        new ResumeDownloadHTTPCon().setConnection(this.fileDetailsClass);
     }
 
     @Override

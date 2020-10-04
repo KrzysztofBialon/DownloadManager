@@ -16,10 +16,11 @@ public class DownloadActionLogicThread
     public static Runnable downloadActionThread(URL url, String extension, VBox downloadListWrapper)
     {
         Runnable runnable =() -> {
-            FileDetailsBuilder fileDetailsBuilder = new FileDetailsBuilder(url, extension);
+            FileDetailsBuilder fileDetailsBuilder = new FileDetailsBuilder();
+            fileDetailsBuilder.createFileDetailsClass(url, extension);
             FileDetailsDirector fileDetailsDirector = new FileDetailsDirector(fileDetailsBuilder);
             try {
-                fileDetailsDirector.constructFileDetails();
+                fileDetailsDirector.constructFileDetails(false);
             } catch (Exception e) {
                 e.printStackTrace();
                 return;

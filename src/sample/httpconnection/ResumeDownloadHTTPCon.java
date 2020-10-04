@@ -1,23 +1,32 @@
 package sample.httpconnection;
 
-import sample.logic.files.CheckFileSize;
+import sample.gui.elements.alert.AlertFactory;
 import sample.logic.interfaces.IHTTPConnection;
 import sample.logic.util.fileClass.FileDetailsClass;
+
+import javax.net.ssl.HttpsURLConnection;
 import java.io.IOException;
 
 public class ResumeDownloadHTTPCon implements IHTTPConnection
 {
-    long fileSize = 0;
     @Override
     public void setConnection(FileDetailsClass detailsClass) throws IOException
-    {//TODO resume con
-        fileSize = CheckFileSize.checkSize(detailsClass.getFileHeaderName());
-        detailsClass.setCurrentFilesize(fileSize);
-        if(fileSize == 0)
+    {
+        HttpsURLConnection httpsURLConnection = (HttpsURLConnection) detailsClass.getFileURL().openConnection();
+        httpsURLConnection.setConnectTimeout(5000);
+        httpsURLConnection.setRequestProperty("Range", "bytes="+(detailsClass.getCurrentFilesize())+"-");
+        httpsURLConnection.setRequestMethod("GET");
+        httpsURLConnection.connect();
+
+        if(httpsURLConnection.getResponseCode() / 100 != 2)
         {
-            //TODO alert no exists
+            AlertFactory.createAlert("CouldntConnectToServerAlert").showAndWait();
             return;
         }
-        ConnectToServer.connect(detailsClass, true);
+
+        detailsClass.
+                setFileSize(
+                        httpsURLConnection.
+                                getContentLengthLong());
     }
 }

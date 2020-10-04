@@ -5,14 +5,12 @@ import sample.logic.util.fileClass.FileDetailsClass;
 import java.io.IOException;
 import java.net.URL;
 import java.util.LinkedHashMap;
+import java.util.List;
 
 public class PausedDownloadBarInitializer
 {
-    public static FileDetailsClass initializeDetailsClass(LinkedHashMap<String, String> map, int iterator) throws IOException {
+    public static FileDetailsClass initializeDetailsClass(String[] extracted) throws IOException {
 
-        String key = map.get(map.keySet().toArray()[iterator]);
-        long fileSize = CheckFileSize.checkSize(map.get(key));
-        URL url = new URL(map.get(key));
         FileDetailsClass detailsClass = new FileDetailsClass();
 
         detailsClass.setFileHeaderName(key);

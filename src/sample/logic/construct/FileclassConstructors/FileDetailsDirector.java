@@ -2,6 +2,7 @@ package sample.logic.construct.FileclassConstructors;
 
 import javafx.application.Platform;
 import sample.gui.elements.alert.AlertFactory;
+import sample.logic.construct.factory.BuilderFactory;
 import sample.logic.util.fileClass.FileDetailsClass;
 
 import java.io.IOException;
@@ -14,11 +15,12 @@ public class FileDetailsDirector
         this.fileDetailsBuilder = fileDetailsBuilder;
     }
 
-    public void constructFileDetails() throws IOException {
+    public void constructFileDetails(boolean isResume) throws IOException {
 
+        //TODO rearrange builder to be build in factory in constructor
         try
         {
-            fileDetailsBuilder.createHTTPSConnection();
+            BuilderFactory.getBuilder(isResume).createHTTPSConnection();
         } catch (Exception e)
         {
             Platform.runLater(()-> AlertFactory.createAlert("ProtocolAlert"));
