@@ -50,6 +50,10 @@ public class FileDetailsClass
         return currentFilesize;
     }
 
+    public Task getTask() {
+        return task;
+    }
+
     public void setFileURL(URL fileURL) {
         this.fileURL = fileURL;
     }
@@ -68,7 +72,7 @@ public class FileDetailsClass
     }
 
     public void setBar() {
-        this.bar = new DownloadItemBar(fileHeaderName, task);
+        this.bar = new DownloadItemBar(this);
         //this.bar.getProgressBar().progressProperty().bind(task.progressProperty());
     }
 

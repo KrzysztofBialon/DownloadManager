@@ -8,6 +8,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import sample.logic.event.CancelDownloadEvent;
 import sample.logic.event.PauseDownloadEvent;
+import sample.logic.util.fileClass.FileDetailsClass;
 
 public class DownloadItemBar {
 
@@ -19,11 +20,11 @@ public class DownloadItemBar {
     private final Button cancelBtn;
     private ProgressBar progressBar;
 
-    public DownloadItemBar(String filename, Task task) {
+    public DownloadItemBar(FileDetailsClass detailsClass) {
 
         this.wrapper = new HBox(6);
 
-        this.filename = new Label(filename);
+        this.filename = new Label(detailsClass.getFileHeaderName());
         this.filename.setMinSize(60, 20);
         this.filename.setMaxSize(100, 20);
         this.filename.prefWidthProperty().bind(wrapper.widthProperty());
@@ -34,7 +35,8 @@ public class DownloadItemBar {
         this.progressBar.setMaxSize(100, 20);
         this.progressBar.prefWidthProperty().bind(wrapper.widthProperty());
         this.progressBar.prefHeightProperty().bind(wrapper.heightProperty());
-        this.progressBar.progressProperty().bind(task.progressProperty());
+        //TODO move to action
+        this.progressBar.progressProperty().bind(detailsClass.getTask().progressProperty());
 
         this.startBtn = new Button("S");
         this.startBtn.setMinSize(60, 20);
@@ -47,14 +49,14 @@ public class DownloadItemBar {
         this.pauseBtn.setMaxSize(100, 20);
         this.pauseBtn.prefWidthProperty().bind(wrapper.widthProperty());
         this.pauseBtn.prefHeightProperty().bind(wrapper.heightProperty());
-        this.pauseBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, new PauseDownloadEvent(task));
+        this.pauseBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, new PauseDownloadEvent(detailsClass.getTask()));
 
         this.cancelBtn = new Button("C");
         this.cancelBtn.setMinSize(60, 20);
         this.cancelBtn.setMaxSize(100, 20);
         this.cancelBtn.prefWidthProperty().bind(wrapper.widthProperty());
         this.cancelBtn.prefHeightProperty().bind(wrapper.heightProperty());
-        this.cancelBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, new CancelDownloadEvent(task, filename));
+        this.cancelBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, new CancelDownloadEvent(detailsClass.getTask(), detailsClass.getFileHeaderName()));
 
         wrapper.getChildren().setAll(
                 this.filename, progressBar, downloadStatus, startBtn, pauseBtn, cancelBtn);
