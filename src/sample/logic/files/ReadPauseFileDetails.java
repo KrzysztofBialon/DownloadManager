@@ -3,20 +3,22 @@ package sample.logic.files;
 import java.io.*;
 import java.util.*;
 
-public class ReadURLandNameFromFile
+public class ReadPauseFileDetails
 {
-    public static Map<String, String> readPausedFilesFromFile() throws IOException {
+    public static List<String> readPausedFilesFromFile() throws IOException {
+
         File file = new File("pausedFiles/pausedFiles.txt");
         BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
-        Map<String, String> map = new HashMap<>();
+        List<String>  pausedFilesDetailsList = new ArrayList<>();
         String line;
+
         while((line = bufferedReader.readLine()) != null)
         {
-            map.put(line, bufferedReader.readLine());
+            pausedFilesDetailsList.add(line);
         }
 
         bufferedReader.close();
 
-        return map;
+        return pausedFilesDetailsList;
     }
 }

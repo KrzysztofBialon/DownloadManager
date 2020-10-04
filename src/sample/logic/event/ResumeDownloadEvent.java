@@ -1,11 +1,7 @@
 package sample.logic.event;
 
-import javafx.concurrent.Task;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import sample.httpconnection.ResumeDownloadHTTPCon;
-
-import java.io.File;
 
 public class ResumeDownloadEvent implements EventHandler
 {

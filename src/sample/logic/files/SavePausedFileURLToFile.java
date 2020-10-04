@@ -13,13 +13,17 @@ public class SavePausedFileURLToFile
 
        file.createNewFile();
 
+       String details =
+                       detailsClass.getFileHeaderName() + " " +
+                       detailsClass.getFileURL() + " " +
+                       detailsClass.getCurrentFilesize() + " " +
+                       detailsClass.getFileSize();
+
        BufferedWriter writer = new BufferedWriter(
                new FileWriter(pausedFilesPath, true));
-       //write to file
-       writer.write(detailsClass.getFileHeaderName());
+
        writer.newLine();
-       writer.write(String.valueOf(detailsClass.getFileURL()));
-       writer.newLine();
+       writer.write(details);
        writer.close();
      }
 }

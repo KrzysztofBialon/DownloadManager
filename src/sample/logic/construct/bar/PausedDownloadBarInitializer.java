@@ -12,10 +12,11 @@ public class PausedDownloadBarInitializer
 
         String key = map.get(map.keySet().toArray()[iterator]);
         long fileSize = CheckFileSize.checkSize(map.get(key));
+        URL url = new URL(map.get(key));
         FileDetailsClass detailsClass = new FileDetailsClass();
 
         detailsClass.setFileHeaderName(key);
-        detailsClass.setFileURL(new URL(map.get(key)));
+        detailsClass.setFileURL(url);
         detailsClass.setCurrentFilesize(fileSize);
 
         return detailsClass;
