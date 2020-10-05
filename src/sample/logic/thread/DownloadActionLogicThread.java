@@ -2,8 +2,9 @@ package sample.logic.thread;
 
 import javafx.application.Platform;
 import javafx.scene.layout.VBox;
-import sample.logic.construct.FileclassConstructors.FileDetailsBuilder;
+import sample.logic.construct.FileclassConstructors.NewFileDetailsBuilder;
 import sample.logic.construct.FileclassConstructors.FileDetailsDirector;
+import sample.logic.construct.factory.BuilderFactory;
 
 import java.net.URL;
 import java.util.concurrent.ExecutorService;
@@ -16,11 +17,12 @@ public class DownloadActionLogicThread
     public static Runnable downloadActionThread(URL url, String extension, VBox downloadListWrapper)
     {
         Runnable runnable =() -> {
-            FileDetailsBuilder fileDetailsBuilder = new FileDetailsBuilder();
-            fileDetailsBuilder.createFileDetailsClass(url, extension);
+
+            NewFileDetailsBuilder fileDetailsBuilder = (NewFileDetailsBuilder) BuilderFactory.getBuilder(false);
             FileDetailsDirector fileDetailsDirector = new FileDetailsDirector(fileDetailsBuilder);
+
             try {
-                fileDetailsDirector.constructFileDetails(false);
+                fileDetailsDirector.constructFileDetails(url, extension);
             } catch (Exception e) {
                 e.printStackTrace();
                 return;

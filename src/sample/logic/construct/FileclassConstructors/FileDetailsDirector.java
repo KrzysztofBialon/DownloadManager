@@ -3,24 +3,26 @@ package sample.logic.construct.FileclassConstructors;
 import javafx.application.Platform;
 import sample.gui.elements.alert.AlertFactory;
 import sample.logic.construct.factory.BuilderFactory;
+import sample.logic.interfaces.IFileDetailsBuilder;
 import sample.logic.util.fileClass.FileDetailsClass;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class FileDetailsDirector
 {
-    private FileDetailsBuilder fileDetailsBuilder;
+    private IFileDetailsBuilder fileDetailsBuilder; //TODO change to Interface to be chosen in factory
 
-    public FileDetailsDirector(FileDetailsBuilder fileDetailsBuilder) {
+    public FileDetailsDirector(IFileDetailsBuilder fileDetailsBuilder) {
         this.fileDetailsBuilder = fileDetailsBuilder;
     }
 
-    public void constructFileDetails(boolean isResume) throws IOException {
+    public void constructFileDetails(URL url, String extension) throws IOException {
 
-        //TODO rearrange builder to be build in factory in constructor
+        fileDetailsBuilder.createFileDetailsClass(url, extension, 0);
         try
         {
-            BuilderFactory.getBuilder(isResume).createHTTPSConnection();
+            fileDetailsBuilder.createHTTPSConnection();
         } catch (Exception e)
         {
             Platform.runLater(()-> AlertFactory.createAlert("ProtocolAlert"));
