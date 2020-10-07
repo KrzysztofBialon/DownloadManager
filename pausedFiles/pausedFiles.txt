@@ -1,10 +1,1 @@
-89c52132-cfc2-4b26-975f-3431af88f8c5.exe https://javadl.oracle.com/webapps/download/AutoDL?BundleId=242990_a4634525489241b9a9e1aa73d9e118e6 83038856
-835e7a80-00df-4314-9e61-87f4c1fb66aa.exe https://javadl.oracle.com/webapps/download/AutoDL?BundleId=242990_a4634525489241b9a9e1aa73d9e118e6 83038856
-298e0e7d-ef96-444b-8c6b-ff87acb39d50.exe https://javadl.oracle.com/webapps/download/AutoDL?BundleId=242990_a4634525489241b9a9e1aa73d9e118e6 83038856
-ac654649-06fb-4e7c-9e2d-46bae06e8340.exe https://javadl.oracle.com/webapps/download/AutoDL?BundleId=242990_a4634525489241b9a9e1aa73d9e118e6 83038856
-397dd0e8-8447-4a25-9d7a-240880d925d5.exe https://javadl.oracle.com/webapps/download/AutoDL?BundleId=242990_a4634525489241b9a9e1aa73d9e118e6 83038856
-397dd0e8-8447-4a25-9d7a-240880d925d5.exe https://javadl.oracle.com/webapps/download/AutoDL?BundleId=242990_a4634525489241b9a9e1aa73d9e118e6 83038856
-de70dcde-6f28-47b9-9307-b9f83cf7c26a.exe https://javadl.oracle.com/webapps/download/AutoDL?BundleId=242990_a4634525489241b9a9e1aa73d9e118e6 83038856
-ac654649-06fb-4e7c-9e2d-46bae06e8340.exe https://javadl.oracle.com/webapps/download/AutoDL?BundleId=242990_a4634525489241b9a9e1aa73d9e118e6 83038856
-594bf397-e801-48a0-b7e1-e01019a9c61c.exe https://javadl.oracle.com/webapps/download/AutoDL?BundleId=242990_a4634525489241b9a9e1aa73d9e118e6 83038856
-f3b12e2a-f558-4a48-9d45-acf0f4f21d9b.exe https://javadl.oracle.com/webapps/download/AutoDL?BundleId=242990_a4634525489241b9a9e1aa73d9e118e6 83038856
+8d51c3aa-5926-4e63-bc7b-6a91848b3ce1.exe https://www.rarlab.com/rar/wrar591pl.exe 3267696

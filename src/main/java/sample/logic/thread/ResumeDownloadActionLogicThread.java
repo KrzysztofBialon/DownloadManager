@@ -15,7 +15,7 @@ public class ResumeDownloadActionLogicThread
         Runnable runnable =() -> {
             ResumeFileDetailsBuilder fileDetailsBuilder = (ResumeFileDetailsBuilder) BuilderFactory.getBuilder(true);
             FileDetailsDirector fileDetailsDirector = new FileDetailsDirector(fileDetailsBuilder);
-
+            System.out.println(fileDetailsDirector.getFileDetailsClass().getCurrentFilesize());
             try {
                 fileDetailsDirector.constructFileDetails(url, extension, fileDetailsDirector.getFileDetailsClass().getCurrentFilesize());
             } catch (Exception e) {

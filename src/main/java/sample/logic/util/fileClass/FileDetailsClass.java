@@ -76,7 +76,7 @@ public class FileDetailsClass
         this.bar = new DownloadItemBar(this);
         //Platform.runLater(()->this.bar.getProgressBar().progressProperty().setValue(fileSize/currentFilesize));
         Platform.runLater(()->this.bar.getProgressBar().progressProperty().setValue(0.5));
-        Platform.runLater(()->this.bar.getProgressBar().progressProperty().bind(task.progressProperty()));
+        //Platform.runLater(()->this.bar.getProgressBar().progressProperty().bind(task.progressProperty()));
         //TODO check if works properly
     }
 

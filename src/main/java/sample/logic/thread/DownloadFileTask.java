@@ -27,8 +27,9 @@ public class DownloadFileTask extends Task {
     protected Void call(){
         try
         {
+            System.out.println("kutas!");
             Platform.runLater(()->details.getBar().getDownloadStatus().setText("Downloading"));
-
+            Platform.runLater(()->this.details.getBar().getProgressBar().progressProperty().bind(this.progressProperty()));
             for(long pos = 0; pos < fileSize; pos += 32)
             {
                 try
@@ -37,6 +38,7 @@ public class DownloadFileTask extends Task {
                 }
                 catch (ClosedChannelException e)
                 {
+                    fileChannel.close();
                     e.printStackTrace();
                     return null;
                 }

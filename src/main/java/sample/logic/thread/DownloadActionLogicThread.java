@@ -16,7 +16,6 @@ public class DownloadActionLogicThread
     public static Runnable downloadActionThread(URL url, String extension, VBox downloadListWrapper)
     {
         Runnable runnable =() -> {
-//TODO implement differet thread forresume and for start, start stays the same, resume updates existing bar not adding new
             NewFileDetailsBuilder fileDetailsBuilder = (NewFileDetailsBuilder) BuilderFactory.getBuilder(false);
             FileDetailsDirector fileDetailsDirector = new FileDetailsDirector(fileDetailsBuilder);
 
@@ -27,7 +26,9 @@ public class DownloadActionLogicThread
                 return;
             }
             Platform.runLater(() -> downloadListWrapper.getChildren().add(fileDetailsDirector.getFileDetailsClass().getBar().getWrapper()));
-            new Thread(() -> fileDetailsDirector.getFileDetailsClass().getThread()).start();
+            Thread thread = fileDetailsDirector.getFileDetailsClass().getThread();
+            thread.setDaemon(true);
+            thread.start();
         };
         return runnable;
     }

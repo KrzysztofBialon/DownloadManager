@@ -21,10 +21,8 @@ public class ResumeDownloadEvent implements EventHandler
     @Override
     public void handle(Event event)
     {
-
         //TODO resume get existing bar, update it, link existing elements
         //TODO passs thread pool here
-
         Thread downloadAction = new Thread(ResumeDownloadActionLogicThread.
                 downloadActionThread(detailsClass.getFileURL(), detailsClass.getExtension()));//TODO pass filesize
 
