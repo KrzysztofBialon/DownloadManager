@@ -40,6 +40,7 @@ public class FileDetailsClass
     }
 
     public Thread getThread() {
+        System.out.println("getThread");
         return thread;
     }
 
@@ -75,7 +76,6 @@ public class FileDetailsClass
     public void setBar() {
         this.bar = new DownloadItemBar(this);
         //Platform.runLater(()->this.bar.getProgressBar().progressProperty().setValue(fileSize/currentFilesize));
-        Platform.runLater(()->this.bar.getProgressBar().progressProperty().setValue(0.5));
         //Platform.runLater(()->this.bar.getProgressBar().progressProperty().bind(task.progressProperty()));
         //TODO check if works properly
     }
@@ -84,6 +84,7 @@ public class FileDetailsClass
     {
         thread = new Thread(task);
         thread.setDaemon(true);
+        System.out.println("setthread");
     }
 
     public void setFileSize(long fileSize) {

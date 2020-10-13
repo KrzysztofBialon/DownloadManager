@@ -17,7 +17,7 @@ public class SaveFileFromURL{
 
     public static DownloadFileTask setDestination(FileDetailsClass details) throws IOException {
 
-        File file = FileCreator.createFile(details);
+        File file = FileCreator.createFile(details);//TODO make resume write to the same file not create new
         FileOutputStream fileOutputStream;
         ReadableByteChannel readableByteChannel;
         FileChannel fileChannel;

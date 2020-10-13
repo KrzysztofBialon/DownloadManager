@@ -6,24 +6,28 @@ import sample.logic.construct.FileclassConstructors.FileDetailsDirector;
 import sample.logic.construct.FileclassConstructors.NewFileDetailsBuilder;
 import sample.logic.construct.FileclassConstructors.ResumeFileDetailsBuilder;
 import sample.logic.construct.factory.BuilderFactory;
+import sample.logic.util.fileClass.FileDetailsClass;
+
 import java.net.URL;
 
 public class ResumeDownloadActionLogicThread
 {
-    public static Runnable downloadActionThread(URL url, String extension)
+    public static Runnable downloadActionThread(FileDetailsClass detailsClass)
     {
         Runnable runnable =() -> {
             ResumeFileDetailsBuilder fileDetailsBuilder = (ResumeFileDetailsBuilder) BuilderFactory.getBuilder(true);
             FileDetailsDirector fileDetailsDirector = new FileDetailsDirector(fileDetailsBuilder);
-            System.out.println(fileDetailsDirector.getFileDetailsClass().getCurrentFilesize());
+
             try {
-                fileDetailsDirector.constructFileDetails(url, extension, fileDetailsDirector.getFileDetailsClass().getCurrentFilesize());
+                fileDetailsDirector.constructFileDetails(detailsClass.getFileURL(), detailsClass.getExtension(), detailsClass.getCurrentFilesize());
             } catch (Exception e) {
                 e.printStackTrace();
                 return;
             }
-
-            new Thread(() -> fileDetailsDirector.getFileDetailsClass().getThread()).start();
+            Thread thread = fileDetailsDirector.getFileDetailsClass().getThread();
+            thread.setDaemon(true);
+            thread.start();
+            //new Thread(() -> fileDetailsDirector.getFileDetailsClass().getThread()).start();
         };
         return runnable;
     }

@@ -58,6 +58,6 @@ public class Controller {
                                         InitializePausedDownloadObjects.
                                                 loadPausedFiles(
                                                         ReadPauseFileDetails.
-                                                                readPausedFilesFromFile(), downloadUserActionThreadPool)));
+                                                                readPausedFilesFromFile(), downloadUserActionThreadPool, downloadListWrapper)));
     }
 }

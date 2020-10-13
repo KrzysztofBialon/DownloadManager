@@ -1,6 +1,7 @@
 package sample.logic.construct;
 
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
 import sample.logic.construct.FileclassConstructors.FileDetailsDirector;
 import sample.logic.construct.factory.BuilderFactory;
 import sample.logic.event.ResumeDownloadEvent;
@@ -19,7 +20,7 @@ import java.util.concurrent.ExecutorService;
 
 public class InitializePausedDownloadObjects
 {
-    public static List<FileDetailsClass> loadPausedFiles(List<String> pausedFilesDetailsList, ExecutorService executorService)
+    public static List<FileDetailsClass> loadPausedFiles(List<String> pausedFilesDetailsList, ExecutorService executorService, VBox wrapper)
     {
         List<FileDetailsClass> pausedfiles = new ArrayList<>();
 
@@ -60,8 +61,8 @@ public class InitializePausedDownloadObjects
                                 addEventHandler(
                                         MouseEvent.MOUSE_CLICKED,
                                         new ResumeDownloadEvent(
-                                                fileDetailsClass, executorService));
-                    } catch (IOException e) { e.printStackTrace(); }
+                                                fileDetailsClass, executorService, wrapper));
+                    } catch (IOException e) {e.printStackTrace();}
 
                     //TODO if catch exit creating object
                 });

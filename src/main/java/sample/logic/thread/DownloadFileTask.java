@@ -29,10 +29,11 @@ public class DownloadFileTask extends Task {
         {
             System.out.println("kutas!");
             Platform.runLater(()->details.getBar().getDownloadStatus().setText("Downloading"));
-            Platform.runLater(()->this.details.getBar().getProgressBar().progressProperty().bind(this.progressProperty()));
+            Platform.runLater(()->details.getBar().getProgressBar().progressProperty().bind(this.progressProperty()));
             for(long pos = 0; pos < fileSize; pos += 32)
             {
-                try
+                //TODO creating new file instead of resuming eisiting, probably two different details objects
+                try//TODO resuming creates new file instead of rewriting existing
                 {
                     fileChannel.transferFrom(readableByteChannel, pos, Long.MAX_VALUE);
                 }
