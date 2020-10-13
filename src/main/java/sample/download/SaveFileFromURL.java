@@ -15,9 +15,18 @@ import java.nio.channels.ReadableByteChannel;
 
 public class SaveFileFromURL{
 
-    public static DownloadFileTask setDestination(FileDetailsClass details) throws IOException {
+    public static DownloadFileTask setDestination(FileDetailsClass details, boolean isResume) throws IOException {
+        File file;
 
-        File file = FileCreator.createFile(details);//TODO make resume write to the same file not create new
+        if(isResume)
+        {
+            System.out.println(details.getFileHeaderName());
+            file = new File("C:/Users/User/Downloads" + File.separator + details.getFileHeaderName());
+        }else
+        {
+            file = FileCreator.createFile(details);//TODO make resume write to the same file not create new
+        }
+
         FileOutputStream fileOutputStream;
         ReadableByteChannel readableByteChannel;
         FileChannel fileChannel;

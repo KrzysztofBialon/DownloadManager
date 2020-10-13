@@ -52,8 +52,8 @@ public class InitializePausedDownloadObjects
                     fileDetailsDirector = new FileDetailsDirector(fileDetailsBuilder);
 
                     try {
-                        fileDetailsDirector.constructFileDetails(url,extension, currentFilesize);
-                        fileDetailsClass =fileDetailsDirector.getFileDetailsClass();
+                        fileDetailsDirector.constructFileDetails(url,extension, currentFilesize, name);
+                        fileDetailsClass = fileDetailsDirector.getFileDetailsClass();
                         pausedfiles.add(fileDetailsClass);
                         fileDetailsClass.
                                 getBar().

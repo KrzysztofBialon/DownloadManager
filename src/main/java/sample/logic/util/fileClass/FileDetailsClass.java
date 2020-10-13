@@ -70,7 +70,7 @@ public class FileDetailsClass
 
     public void setTask() throws IOException
     {
-        this.task = SaveFileFromURL.setDestination(this);
+        this.task = SaveFileFromURL.setDestination(this, true);
     }
 
     public void setBar() {

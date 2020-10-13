@@ -17,9 +17,9 @@ public class FileDetailsDirector
         this.fileDetailsBuilder = fileDetailsBuilder;
     }
 //TODO current filesize injection rethink delete fromhere
-    public void constructFileDetails(URL url, String extension, long currentFileSize) throws IOException {
+    public void constructFileDetails(URL url, String extension, long currentFileSize, String name) throws IOException {
 
-        fileDetailsBuilder.createFileDetailsClass(url, extension, currentFileSize);
+        fileDetailsBuilder.createFileDetailsClass(url, extension, currentFileSize, name);
         try
         {
             fileDetailsBuilder.createHTTPSConnection();

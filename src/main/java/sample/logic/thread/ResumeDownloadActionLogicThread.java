@@ -15,19 +15,9 @@ public class ResumeDownloadActionLogicThread
     public static Runnable downloadActionThread(FileDetailsClass detailsClass)
     {
         Runnable runnable =() -> {
-            ResumeFileDetailsBuilder fileDetailsBuilder = (ResumeFileDetailsBuilder) BuilderFactory.getBuilder(true);
-            FileDetailsDirector fileDetailsDirector = new FileDetailsDirector(fileDetailsBuilder);
-
-            try {
-                fileDetailsDirector.constructFileDetails(detailsClass.getFileURL(), detailsClass.getExtension(), detailsClass.getCurrentFilesize());
-            } catch (Exception e) {
-                e.printStackTrace();
-                return;
-            }
-            Thread thread = fileDetailsDirector.getFileDetailsClass().getThread();
+            Thread thread = detailsClass.getThread();
             thread.setDaemon(true);
             thread.start();
-            //new Thread(() -> fileDetailsDirector.getFileDetailsClass().getThread()).start();
         };
         return runnable;
     }

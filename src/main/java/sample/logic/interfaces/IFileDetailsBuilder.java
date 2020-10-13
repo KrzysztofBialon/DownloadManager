@@ -7,7 +7,7 @@ import java.net.URL;
 
 public interface IFileDetailsBuilder
 {
-    void createFileDetailsClass(URL url, String extension, long currentFileSize);
+    void createFileDetailsClass(URL url, String extension, long currentFileSize, String name);
     void createHTTPSConnection() throws Exception;
     void createDownloadBar();
     void createDownloadTask() throws IOException;

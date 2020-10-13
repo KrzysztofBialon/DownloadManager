@@ -20,7 +20,7 @@ public class DownloadActionLogicThread
             FileDetailsDirector fileDetailsDirector = new FileDetailsDirector(fileDetailsBuilder);
 
             try {
-                fileDetailsDirector.constructFileDetails(url, extension, 0);
+                fileDetailsDirector.constructFileDetails(url, extension, 0, "");
             } catch (Exception e) {
                 e.printStackTrace();
                 return;

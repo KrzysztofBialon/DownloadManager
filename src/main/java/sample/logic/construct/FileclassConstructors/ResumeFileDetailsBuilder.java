@@ -12,12 +12,13 @@ public class ResumeFileDetailsBuilder implements IFileDetailsBuilder
     private FileDetailsClass fileDetailsClass;
 
     @Override
-    public void createFileDetailsClass(URL url, String extension, long currentFileSize)
+    public void createFileDetailsClass(URL url, String extension, long currentFileSize, String name)
     {
         this.fileDetailsClass = new FileDetailsClass();
         this.fileDetailsClass.setFileURL(url);
         this.fileDetailsClass.setExtension(extension);
         this.fileDetailsClass.setCurrentFilesize(currentFileSize);
+        this.fileDetailsClass.setFileHeaderName(name);
     }
 
     @Override
