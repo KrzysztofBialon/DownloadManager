@@ -33,7 +33,7 @@ public class NewFileDetailsBuilder implements IFileDetailsBuilder
 
     @Override
     public void createDownloadTask() throws IOException {
-        fileDetailsClass.setTask();
+        fileDetailsClass.setTask(false);
     }
 
     @Override

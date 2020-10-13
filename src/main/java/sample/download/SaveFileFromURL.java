@@ -16,26 +16,28 @@ import java.nio.channels.ReadableByteChannel;
 public class SaveFileFromURL{
 
     public static DownloadFileTask setDestination(FileDetailsClass details, boolean isResume) throws IOException {
-        File file;
 
-        if(isResume)
+        File file;
+        FileOutputStream fileOutputStream;
+        ReadableByteChannel readableByteChannel;
+        FileChannel fileChannel;
+
+        file = isResume ?
+                new File("C:/Users/User/Downloads" + File.separator + details.getFileHeaderName())
+                : FileCreator.createFile(details);
+        /*if(isResume)
         {
-            System.out.println(details.getFileHeaderName());
             file = new File("C:/Users/User/Downloads" + File.separator + details.getFileHeaderName());
         }else
         {
             file = FileCreator.createFile(details);//TODO make resume write to the same file not create new
-        }
-
-        FileOutputStream fileOutputStream;
-        ReadableByteChannel readableByteChannel;
-        FileChannel fileChannel;
+        }*/
 
         try {
             readableByteChannel = Channels.newChannel(details.getFileURL().openStream());
         } catch (IOException e) {
             Platform.runLater(()-> AlertFactory.createAlert("NoResourceIOAlert").showAndWait());
-            return null;
+            return null; //TODO get rid of nulls in app
         }
 
         try {

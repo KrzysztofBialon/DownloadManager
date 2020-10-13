@@ -34,7 +34,7 @@ public class ResumeFileDetailsBuilder implements IFileDetailsBuilder
 
     @Override
     public void createDownloadTask() throws IOException {
-        fileDetailsClass.setTask();
+        fileDetailsClass.setTask(true);
     }
 
     @Override

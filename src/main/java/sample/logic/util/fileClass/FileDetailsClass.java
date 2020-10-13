@@ -68,17 +68,12 @@ public class FileDetailsClass
         this.fileHeaderName = fileHeaderName;
     }
 
-    public void setTask() throws IOException
+    public void setTask(boolean isResume) throws IOException
     {
-        this.task = SaveFileFromURL.setDestination(this, true);
+        this.task = SaveFileFromURL.setDestination(this, isResume); //TODO is resume change to switch between on situation
     }
 
-    public void setBar() {
-        this.bar = new DownloadItemBar(this);
-        //Platform.runLater(()->this.bar.getProgressBar().progressProperty().setValue(fileSize/currentFilesize));
-        //Platform.runLater(()->this.bar.getProgressBar().progressProperty().bind(task.progressProperty()));
-        //TODO check if works properly
-    }
+    public void setBar() {this.bar = new DownloadItemBar(this);}
 
     public void setThread()
     {
