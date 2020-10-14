@@ -44,6 +44,7 @@ public class DownloadButtonEvent implements EventHandler {
                     downloadActionThread(url, extension, downloadListWrapper));
 
             downloadUserActionThreadPool.execute(downloadAction);
+
         }
     }
 }

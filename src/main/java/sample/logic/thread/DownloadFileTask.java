@@ -3,6 +3,7 @@ package sample.logic.thread;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import sample.gui.elements.download.bar.DownloadItemBar;
+import sample.logic.files.RewriteFileAfterFinnishingDld;
 import sample.logic.util.fileClass.FileDetailsClass;
 
 import java.io.IOException;
@@ -27,7 +28,6 @@ public class DownloadFileTask extends Task {
     protected Void call(){
         try
         {
-            System.out.println("kutas!");
             Platform.runLater(()->details.getBar().getDownloadStatus().setText("Downloading"));
             Platform.runLater(()->details.getBar().getProgressBar().progressProperty().bind(this.progressProperty()));
             for(long pos = 0; pos < fileSize; pos += 32)
@@ -49,7 +49,8 @@ public class DownloadFileTask extends Task {
             readableByteChannel.close();
             fileChannel.close();
             Platform.runLater(()->details.getBar().getDownloadStatus().setText("Finnished"));
-
+            //TODO erase form txt file finnisheed file
+            RewriteFileAfterFinnishingDld.rewrite(this.details);
         } catch (IOException e) {
             e.printStackTrace();
         }

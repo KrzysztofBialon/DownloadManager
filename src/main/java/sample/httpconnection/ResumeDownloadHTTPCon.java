@@ -23,7 +23,7 @@ public class ResumeDownloadHTTPCon implements IHTTPConnection
             AlertFactory.createAlert("CouldntConnectToServerAlert").showAndWait();
             return;
         }
-
+//TODO delete canceled files from txt
         detailsClass.
                 setFileSize(
                         httpsURLConnection.

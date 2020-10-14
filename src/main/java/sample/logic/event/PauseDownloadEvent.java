@@ -21,10 +21,10 @@ public class PauseDownloadEvent implements EventHandler
     public void handle(Event event)
     {
         detailsClass.getTask().cancel();
-        try {
+        /*try {
             SavePausedFileURLToFile.saveToFile(detailsClass);
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/ //TODO moved to download Actionlogic thread
     }
 }

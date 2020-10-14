@@ -3,9 +3,11 @@ package sample.logic.util.fileClass;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import sample.download.SaveFileFromURL;
+import sample.gui.elements.alert.FileNotFoundAlert;
 import sample.gui.elements.download.bar.DownloadItemBar;
 import sample.logic.event.CancelDownloadEvent;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 
@@ -70,7 +72,7 @@ public class FileDetailsClass
 
     public void setTask(boolean isResume) throws IOException
     {
-        this.task = SaveFileFromURL.setDestination(this, isResume); //TODO is resume change to switch between on situation
+        this.task = SaveFileFromURL.setDestination(this, isResume).orElseThrow(()-> new RuntimeException()); //TODO is resume change to switch between on situation
     }
 
     public void setBar() {this.bar = new DownloadItemBar(this);}
@@ -79,7 +81,6 @@ public class FileDetailsClass
     {
         thread = new Thread(task);
         thread.setDaemon(true);
-        System.out.println("setthread");
     }
 
     public void setFileSize(long fileSize) {
