@@ -23,7 +23,7 @@ public class InitializePausedDownloadObjects
     public static List<FileDetailsClass> loadPausedFiles(List<String> pausedFilesDetailsList, ExecutorService executorService, VBox wrapper)
     {
         List<FileDetailsClass> pausedfiles = new ArrayList<>();
-
+        
         pausedFilesDetailsList.forEach((file)->
                 {
                     String[] splittedDetails;

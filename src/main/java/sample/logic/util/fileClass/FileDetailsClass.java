@@ -72,7 +72,7 @@ public class FileDetailsClass
 
     public void setTask(boolean isResume) throws IOException
     {
-        this.task = SaveFileFromURL.setDestination(this, isResume).orElseThrow(()-> new RuntimeException()); //TODO is resume change to switch between on situation
+        this.task = SaveFileFromURL.setDestination(this, isResume).orElseThrow(()-> new RuntimeException()); //TODO is resume change to switch between on situation get rid of runtime exp
     }
 
     public void setBar() {this.bar = new DownloadItemBar(this);}

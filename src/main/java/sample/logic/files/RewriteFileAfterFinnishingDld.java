@@ -3,7 +3,9 @@ package sample.logic.files;
 import sample.logic.util.fileClass.FileDetailsClass;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Scanner;
 
 public class RewriteFileAfterFinnishingDld
@@ -11,15 +13,15 @@ public class RewriteFileAfterFinnishingDld
     public static void rewrite(FileDetailsClass detailsClass) throws IOException {
 
         Scanner fileScanner = new Scanner(new File("pausedFiles/pausedFiles.txt"));
-        HashSet<String> filesSet = new HashSet<>();
+        List<String> filesSet = new ArrayList<>();
 
-        while (fileScanner.hasNext())
+        while (fileScanner.hasNextLine())
         {
-            if(fileScanner.next().contains(detailsClass.getFileHeaderName()))
+            if(fileScanner.nextLine().contains(detailsClass.getFileHeaderName()))
             {
                 continue;
             }
-            filesSet.add(fileScanner.next());
+            filesSet.add(fileScanner.nextLine());
         }
 
        new PrintWriter("pausedFiles/pausedFiles.txt").close();
