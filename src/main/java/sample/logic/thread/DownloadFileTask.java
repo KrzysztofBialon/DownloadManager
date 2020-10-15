@@ -2,8 +2,7 @@ package sample.logic.thread;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
-import sample.gui.elements.download.bar.DownloadItemBar;
-import sample.logic.files.RewriteFileAfterFinnishingDld;
+import sample.logic.files.crud.RewriteFileAfterFinnishingDld;
 import sample.logic.util.fileClass.FileDetailsClass;
 
 import java.io.IOException;
@@ -30,10 +29,10 @@ public class DownloadFileTask extends Task {
         {
             Platform.runLater(()->details.getBar().getDownloadStatus().setText("Downloading"));
             Platform.runLater(()->details.getBar().getProgressBar().progressProperty().bind(this.progressProperty()));
+            //downlaod process
             for(long pos = 0; pos < fileSize; pos += 32)
             {
-                //TODO creating new file instead of resuming eisiting, probably two different details objects
-                try//TODO resuming creates new file instead of rewriting existing
+                try
                 {
                     fileChannel.transferFrom(readableByteChannel, pos, Long.MAX_VALUE);
                 }
@@ -41,15 +40,15 @@ public class DownloadFileTask extends Task {
                 {
                     fileChannel.close();
                     e.printStackTrace();
-                    return null;
                 }
                 updateProgress(pos, fileSize);
             }
 
             readableByteChannel.close();
             fileChannel.close();
+
             Platform.runLater(()->details.getBar().getDownloadStatus().setText("Finnished"));
-            //TODO erase form txt file finnisheed file
+            //remove file details from pausedFiles.txt after finnishing download
             RewriteFileAfterFinnishingDld.rewrite(this.details);
         } catch (IOException e) {
             e.printStackTrace();

@@ -25,12 +25,13 @@ public class ResumeDownloadEvent implements EventHandler
     @Override
     public void handle(Event event)
     {
-        Thread downloadAction = new Thread(ResumeDownloadActionLogicThread.
-                downloadActionThread(detailsClass));
+        Thread downloadAction = new Thread(ResumeDownloadActionLogicThread.downloadActionThread(detailsClass));
+
         Platform.runLater(()->wrapper.getChildren().remove(detailsClass.getBar().getWrapper()));
         Platform.runLater(()->wrapper.getChildren().add(detailsClass.getBar().getWrapper()));
         Platform.runLater(()->detailsClass.getBar().getDownloadStatus().setText("Downloading"));
         Platform.runLater(()->detailsClass.getBar().getProgressBar().progressProperty().bind(detailsClass.getTask().progressProperty()));
+
         executorService.execute(downloadAction);
     }
 }

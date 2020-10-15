@@ -36,8 +36,6 @@ public class DownloadItemBar {
         this.progressBar.setMaxSize(100, 20);
         this.progressBar.prefWidthProperty().bind(wrapper.widthProperty());
         this.progressBar.prefHeightProperty().bind(wrapper.heightProperty());
-        //TODO move to action
-        //this.progressBar.progressProperty().bind(detailsClass.getTask().progressProperty());
 
         this.startBtn = new Button("R");
         this.startBtn.setMinSize(60, 20);

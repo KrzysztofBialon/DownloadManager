@@ -1,8 +1,8 @@
 package sample.download;
 
 import javafx.application.Platform;
-import sample.gui.elements.alert.AlertFactory;
-import sample.logic.file.creator.FileCreator;
+import sample.logic.constructors.factory.AlertFactory;
+import sample.logic.files.crud.FileCreator;
 import sample.logic.util.fileClass.FileDetailsClass;
 import sample.logic.thread.DownloadFileTask;
 import java.io.File;
@@ -22,18 +22,18 @@ public class SaveFileFromURL{
         FileOutputStream fileOutputStream;
         ReadableByteChannel readableByteChannel;
         FileChannel fileChannel;
-
+        //if new download create file, otherwise get exisiting
         file = isResume ?
                 new File("C:/Users/User/Downloads" + File.separator + details.getFileHeaderName())
                 : FileCreator.createFile(details);
-
+        // open channel from given web resource, if theres no files to download alert it to user
         try {
             readableByteChannel = Channels.newChannel(details.getFileURL().openStream());
         } catch (IOException e) {
             Platform.runLater(()-> AlertFactory.createAlert("NoResourceIOAlert").showAndWait());
-            return Optional.empty(); //TODO get rid of nulls in app
+            return Optional.empty(); //TODO rethink if alerts nessesary here
         }
-
+        //open channel to existing file, if file not fount inform user
         try {
             fileOutputStream = new FileOutputStream(file);
             fileChannel = fileOutputStream.getChannel();
@@ -41,7 +41,6 @@ public class SaveFileFromURL{
             Platform.runLater(()-> AlertFactory.createAlert("FileNotFoundAlert").showAndWait());
             return Optional.empty();
         }
-
 
         return Optional.of(new DownloadFileTask(fileChannel, readableByteChannel, details));
     };

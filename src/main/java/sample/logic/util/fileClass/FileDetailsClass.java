@@ -1,19 +1,13 @@
 package sample.logic.util.fileClass;
 
-import javafx.application.Platform;
 import javafx.concurrent.Task;
 import sample.download.SaveFileFromURL;
-import sample.gui.elements.alert.FileNotFoundAlert;
 import sample.gui.elements.download.bar.DownloadItemBar;
-import sample.logic.event.CancelDownloadEvent;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 
 public class FileDetailsClass
 {
-    //TODO fix headername (always null)
     private URL fileURL;
     private String extension;
     private String fileHeaderName;
@@ -22,7 +16,6 @@ public class FileDetailsClass
     private Task task;
     private DownloadItemBar bar;
     private Thread thread;
-
 
 
     public String getFileHeaderName() {
@@ -41,10 +34,7 @@ public class FileDetailsClass
         return extension;
     }
 
-    public Thread getThread() {
-        System.out.println("getThread");
-        return thread;
-    }
+    public Thread getThread() { return thread; }
 
     public DownloadItemBar getBar() {
         return bar;

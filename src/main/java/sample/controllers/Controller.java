@@ -5,10 +5,10 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import sample.logic.GetAllPausedBars;
-import sample.logic.construct.InitializePausedDownloadObjects;
+import sample.logic.paused.GetAllPausedBars;
+import sample.logic.paused.InitializePausedDownloadObjects;
 import sample.logic.event.DownloadButtonEvent;
-import sample.logic.files.ReadPauseFileDetails;
+import sample.logic.files.crud.ReadPauseFileDetails;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -18,10 +18,6 @@ import java.util.concurrent.Executors;
 
 public class Controller {
 
-    @FXML
-    private BorderPane contentWrapper;
-    @FXML
-    private HBox topBarContainer;
     @FXML
     private Button startDownloadBtn;
     @FXML
@@ -33,23 +29,21 @@ public class Controller {
 
     private final List<String> extensionList = Arrays.asList("exe", "zip", "pdf", "txt", "mp3", "mp4");
 
-    private final ExecutorService downloadUserActionThreadPool = Executors.newFixedThreadPool(2);
-//TODO Move executor service to singleton
+    private final ExecutorService downloadThreadPool = Executors.newFixedThreadPool(2);
+
     @FXML
-    public void initialize() throws IOException {
-        contentWrapper.setMaxSize(800, 800);
-        topBarContainer.prefWidthProperty().bind(contentWrapper.widthProperty());
+    public void initialize() throws IOException
+    {
         //Initialize extension box with ext list
         extensionSelectionBox.getItems().setAll(extensionList);
         extensionSelectionBox.setValue(extensionList.get(0));
         //Add functionality to startDownload button
-        //TODO if waiting too long for download cancel, check time waiting for connection
         startDownloadBtn.addEventHandler(MouseEvent.MOUSE_CLICKED, new DownloadButtonEvent(
                 urlInputField,
                 extensionSelectionBox,
                 downloadListWrapper,
-                downloadUserActionThreadPool));
-        //TODO initialize list with pasued downloads
+                downloadThreadPool));
+        //initialize download list with paused files
         downloadListWrapper.
                 getChildren().
                 addAll(
@@ -58,6 +52,8 @@ public class Controller {
                                         InitializePausedDownloadObjects.
                                                 loadPausedFiles(
                                                         ReadPauseFileDetails.
-                                                                readPausedFilesFromFile(), downloadUserActionThreadPool, downloadListWrapper)));
+                                                                readPausedFilesFromFile(),
+                                                                downloadThreadPool,
+                                                                downloadListWrapper)));
     }
 }

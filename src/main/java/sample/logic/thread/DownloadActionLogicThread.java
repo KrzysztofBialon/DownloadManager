@@ -2,15 +2,13 @@ package sample.logic.thread;
 
 import javafx.application.Platform;
 import javafx.scene.layout.VBox;
-import sample.logic.construct.FileclassConstructors.NewFileDetailsBuilder;
-import sample.logic.construct.FileclassConstructors.FileDetailsDirector;
-import sample.logic.construct.factory.BuilderFactory;
-import sample.logic.files.SavePausedFileURLToFile;
+import sample.logic.constructors.builder.NewFileDetailsBuilder;
+import sample.logic.constructors.director.FileDetailsDirector;
+import sample.logic.constructors.factory.BuilderFactory;
+import sample.logic.files.crud.SavePausedFileDetailsToFile;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class DownloadActionLogicThread
 {
@@ -32,7 +30,7 @@ public class DownloadActionLogicThread
             Thread thread = fileDetailsDirector.getFileDetailsClass().getThread();
             // save currently dowloading file to fiels repo
             try {
-                SavePausedFileURLToFile.saveToFile(fileDetailsDirector.getFileDetailsClass());
+                SavePausedFileDetailsToFile.saveToFile(fileDetailsDirector.getFileDetailsClass());
             } catch (IOException e) {
                 e.printStackTrace();
             }
